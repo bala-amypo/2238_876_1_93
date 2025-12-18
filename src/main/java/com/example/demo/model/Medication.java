@@ -11,11 +11,11 @@ public class Medication {
     private String name;
     @ManyToMany
     @JoinTable(
-        name = "student_course",
+        name = "medication_ingredient",
         joinColumns = @JoinColumn(name = "id"),
         inverseJoinColumns = @JoinColumn(name = "name")
     )
-    private Set<Course> courses;
+    private Set<ActiveIngredient> ingredients;
 
     public Long getId() {
         return id;
@@ -35,6 +35,10 @@ public class Medication {
         this.id = id;
         this.name = name;
     }
+    public Set<ActiveIngredient> getIngredients() {
+        return ingredients;
+    }
+
     public ActiveIngredient(){
     }
     

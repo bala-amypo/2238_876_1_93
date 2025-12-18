@@ -8,6 +8,15 @@ public class InteractionRule {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
+
+    @ManyToMany
+    @JoinTable(
+        name = "student_course",
+        joinColumns = @JoinColumn(name = "id"),
+        inverseJoinColumns = @JoinColumn(name = "name")
+    )
+    private Set<Course> courses;
+
     private String name;
     private String email;
     private String password;
