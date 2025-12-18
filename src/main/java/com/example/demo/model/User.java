@@ -1,5 +1,4 @@
 package com.example.demo.entity;
-
 import jakarta.persistence.*;
 
 @Entity
@@ -10,7 +9,7 @@ public class Student {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
     private String name;
-    @Column (unique=true);
+    // @Column (unique=true);
     private String email;
     private String password;
     private String role;
