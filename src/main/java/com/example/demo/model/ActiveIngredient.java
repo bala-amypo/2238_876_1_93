@@ -5,9 +5,10 @@ import jakarta.persistence.*;
 
 public class ActiveIngredient {
 
-    @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @Id
     private Long id;
+    @Control
     private String name;
 
     public Long getId() {

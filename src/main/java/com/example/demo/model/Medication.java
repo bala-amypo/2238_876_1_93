@@ -5,8 +5,8 @@ import jakarta.persistence.*;
 
 public class Medication {
 
-    @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @Id
     private Long id;
     private String name;
     @Entity

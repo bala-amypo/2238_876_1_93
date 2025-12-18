@@ -5,11 +5,11 @@ import jakarta.persistence.*;
 
 public class Student {
 
-    @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @Id
     private Long id;
     private String name;
-    // @Column (unique=true);
+    @Column(unique=true);
     private String email;
     private String password;
     private String role;
