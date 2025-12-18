@@ -10,7 +10,7 @@ public class Student {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
     private String name;
-    @Column 
+    @Column (unique=true);
     private String email;
     private String password;
     private String role;
@@ -49,14 +49,14 @@ public class Student {
         this.role = role;
     }
 
-    public Student(Long id, String name, String mail, String password,String role) {
+    public User(Long id, String name, String mail, String password,String role) {
         this.id = id;
         this.name = name;
         this.mail = mail;
         this.password = password;
-        this.
+        this.role=role;
     }
-    public Student() {
+    public User(){
     }
     
 }
