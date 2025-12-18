@@ -3,13 +3,12 @@ import jakarta.persistence.*;
 
 @Entity
 
-public class Student {
+public class InteractionRule {
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
     private String name;
-    @Column(unique=true);
     private String email;
     private String password;
     private String role;
@@ -48,14 +47,14 @@ public class Student {
         this.role = role;
     }
 
-    public User(Long id, String name, String mail, String password,String role) {
+    public InteractionRule(Long id, String name, String mail, String password,String role) {
         this.id = id;
         this.name = name;
         this.mail = mail;
         this.password = password;
         this.role=role;
     }
-    public User(){
+    public InteractionRule(){
     }
     
 }
