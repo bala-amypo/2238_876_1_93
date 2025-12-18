@@ -4,5 +4,5 @@ public class AuthController {
     @Autowired
     @PostMapping("/auth")
     public User createData(@Request)
-
+    
 }
