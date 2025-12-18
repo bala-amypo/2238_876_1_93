@@ -8,7 +8,7 @@ public class ActiveIngredient {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Id
     private Long id;
-    @Control
+    @Column(unique=true)
     private String name;
 
     public Long getId() {

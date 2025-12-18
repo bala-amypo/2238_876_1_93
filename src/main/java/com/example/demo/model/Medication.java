@@ -9,22 +9,13 @@ public class Medication {
     @Id
     private Long id;
     private String name;
-    @Entity
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    private String name;
-
     @ManyToMany
     @JoinTable(
         name = "student_course",
-        joinColumns = @JoinColumn(name = "student_id"),
-        inverseJoinColumns = @JoinColumn(name = "course_id")
+        joinColumns = @JoinColumn(name = "id"),
+        inverseJoinColumns = @JoinColumn(name = "name")
     )
     private Set<Course> courses;
-}
 
     public Long getId() {
         return id;
