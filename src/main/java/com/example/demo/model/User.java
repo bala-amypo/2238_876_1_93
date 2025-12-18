@@ -10,6 +10,7 @@ public class Student {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
     private String name;
+    @Column 
     private String email;
     private String password;
     private String role;
@@ -21,12 +22,13 @@ public class Student {
         this.id = id;
     }
 
-    public String getnName() {
-        return stuname;
+    public String getName() {
+        return name;
     }
-    public void setStuname(String stuname) {
-        this.stuname = stuname;
+    public void setName(String name) {
+        this.name = name;
     }
+
     public String getStumail() {
         return stumail;
     }
