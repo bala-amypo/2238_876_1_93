@@ -3,7 +3,7 @@ import jakarta.persistence.*;
 
 @Entity
 
-public class Student {
+public class ActiveIngredient {
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
