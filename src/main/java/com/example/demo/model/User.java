@@ -30,22 +30,31 @@ public class Student {
     }
 
     public String getStumail() {
-        return stumail;
+        return mail;
     }
-    public void setStumail(String stumail) {
-        this.stumail = stumail;
+    public void setMail(String mail) {
+        this.mail = mail;
     }
-    public float getCgpa() {
-        return cgpa;
+
+    public String getPassword() {
+        return password;
     }
-    public void setCgpa(float cgpa) {
-        this.cgpa = cgpa;
+    public void setPassword(String password) {
+        this.password = password;
     }
-    public Student(int id, String stuname, String stumail, float cgpa) {
+    public String getRole() {
+        return role;
+    }
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public Student(Long id, String name, String mail, String password,String role) {
         this.id = id;
-        this.stuname = stuname;
-        this.stumail = stumail;
-        this.cgpa = cgpa;
+        this.name = name;
+        this.mail = mail;
+        this.password = password;
+        this.
     }
     public Student() {
     }
