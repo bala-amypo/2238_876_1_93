@@ -1,25 +1,44 @@
-package com.example.demo.model;
+package com.example.demo.entity;
+
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
-
+@Table(name = "medications")
 public class Medication {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @NotBlank
+    @Column(nullable = false, unique = true)
     private String name;
+
+    @NotEmpty
     @ManyToMany
     @JoinTable(
-        name = "medication_ingredient",
-        joinColumns = @JoinColumn(name = "id"),
-        inverseJoinColumns = @JoinColumn(name = "name")
+        name = "medication_ingredients",
+        joinColumns = @JoinColumn(name = "medication_id"),
+        inverseJoinColumns = @JoinColumn(name = "ingredient_id")
     )
-    private Set<ActiveIngredient> ingredients;
+    private Set<ActiveIngredient> ingredients = new HashSet<>();
+
+    public Medication() {
+    }
+
+    public Medication(String name, Set<ActiveIngredient> ingredients) {
+        this.name = name;
+        this.ingredients = ingredients;
+    }
 
     public Long getId() {
         return id;
     }
+
     public void setId(Long id) {
         this.id = id;
     }
@@ -27,19 +46,16 @@ public class Medication {
     public String getName() {
         return name;
     }
+
     public void setName(String name) {
         this.name = name;
     }
 
-    public ActiveIngredient(Long id, String name) {
-        this.id = id;
-        this.name = name;
-    }
     public Set<ActiveIngredient> getIngredients() {
         return ingredients;
     }
 
-    public ActiveIngredient(){
+    public void setIngredients(Set<ActiveIngredient> ingredients) {
+        this.ingredients = ingredients;
     }
-    
 }
