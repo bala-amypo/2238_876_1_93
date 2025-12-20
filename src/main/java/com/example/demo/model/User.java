@@ -36,12 +36,12 @@ public class User {
         this.role = role == null ? "USER" : role;
     }
     public void setPassword(String password) {
-    this.password = password;
-}
+        this.password = password;
+    }
 
-public void setRole(String role) {
-    this.role = role;
-}
+    public void setRole(String role) {
+        this.role = role;
+    }
 
 
     public Long getId() {
