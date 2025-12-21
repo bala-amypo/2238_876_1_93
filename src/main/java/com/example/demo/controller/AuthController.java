@@ -6,7 +6,6 @@ import com.example.demo.dto.RegisterRequest;
 import com.example.demo.model.User;
 import com.example.demo.service.UserService;
 import com.example.demo.util.JwtUtil;
-
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,15 +24,16 @@ public class AuthController {
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody RegisterRequest request) {
 
+        String role = request.getRole() != null ? request.getRole() : "USER";
+
         User user = new User(
                 request.getName(),
                 request.getEmail(),
                 request.getPassword(),
-                request.getRole()
+                role
         );
 
-        User savedUser = userService.register(user);
-        return ResponseEntity.ok(savedUser);
+        return ResponseEntity.ok(userService.register(user));
     }
 
     @PostMapping("/login")
