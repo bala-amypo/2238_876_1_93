@@ -11,14 +11,30 @@ public class InteractionCheckResult {
     private Long id;
 
     private String interactions;
+    private String severity;
 
     private LocalDateTime checkedAt;
 
+    public InteractionCheckResult() {}
+
+    // ✅ REQUIRED by tests
+    public InteractionCheckResult(String interactions, String severity) {
+        this.interactions = interactions;
+        this.severity = severity;
+        this.checkedAt = LocalDateTime.now();
+    }
+
     public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }   // ✅ REQUIRED
 
     public String getInteractions() { return interactions; }
     public void setInteractions(String interactions) {
         this.interactions = interactions;
+    }
+
+    public String getSeverity() { return severity; }
+    public void setSeverity(String severity) {
+        this.severity = severity;
     }
 
     public LocalDateTime getCheckedAt() { return checkedAt; }

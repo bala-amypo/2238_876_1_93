@@ -13,7 +13,8 @@ public class ActiveIngredient {
 
     public ActiveIngredient() {}
 
-    public ActiveIngredient(String name) {   // ✅ REQUIRED by tests
+    // ✅ REQUIRED
+    public ActiveIngredient(String name) {
         this.name = name;
     }
 
