@@ -1,11 +1,8 @@
 package com.example.demo.service;
 
-import com.example.demo.dto.InteractionCheckRequest;
-import com.example.demo.entity.InteractionCheckResult;
+import java.util.List;
 
 public interface InteractionService {
 
-    InteractionCheckResult checkInteractions(InteractionCheckRequest request);
-
-    InteractionCheckResult getResultById(Long id);
+    String checkInteractions(List<Long> medicationIds);
 }

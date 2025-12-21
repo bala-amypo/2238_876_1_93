@@ -1,35 +1,36 @@
-package com.example.demo.service;
+package com.example.demo.service.impl;
 
-import com.example.demo.entity.User;
+import com.example.demo.model.User;
 import com.example.demo.repository.UserRepository;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import com.example.demo.service.UserService;
+
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
-    private final PasswordEncoder passwordEncoder;
+    private final BCryptPasswordEncoder encoder;
 
     public UserServiceImpl(UserRepository userRepository,
-                           PasswordEncoder passwordEncoder) {
+                           BCryptPasswordEncoder encoder) {
         this.userRepository = userRepository;
-        this.passwordEncoder = passwordEncoder;
+        this.encoder = encoder;
     }
 
     @Override
-    public User createUser(User user) {
-
-        if (userRepository.existsByEmail(user.getEmail())) {
-            throw new RuntimeException("Email already exists");
-        }
-
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-
-        if (user.getRole() == null) {
-            user.setRole("USER");
-        }
-
+    public User register(User user) {
+        user.setPassword(encoder.encode(user.getPassword()));
         return userRepository.save(user);
+    }
+
+    @Override
+    public User login(String email, String password) {
+        User user = userRepository.findByEmail(email);
+        if (user == null || !encoder.matches(password, user.getPassword())) {
+            return null;
+        }
+        return user;
     }
 }

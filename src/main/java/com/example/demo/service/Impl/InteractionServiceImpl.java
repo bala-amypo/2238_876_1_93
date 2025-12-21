@@ -1,8 +1,14 @@
-package com.example.demo.service;
+package com.example.demo.service.impl;
 
-import com.example.demo.dto.InteractionCheckRequest;
-import com.example.demo.entity.*;
-import com.example.demo.repository.*;
+import com.example.demo.model.ActiveIngredient;
+import com.example.demo.model.InteractionRule;
+import com.example.demo.model.Medication;
+import com.example.demo.model.InteractionCheckResult;
+import com.example.demo.repository.InteractionCheckResultRepository;
+import com.example.demo.repository.InteractionRuleRepository;
+import com.example.demo.repository.MedicationRepository;
+import com.example.demo.service.InteractionService;
+
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -23,45 +29,42 @@ public class InteractionServiceImpl implements InteractionService {
     }
 
     @Override
-    public InteractionCheckResult checkInteractions(InteractionCheckRequest request) {
+    public String checkInteractions(List<Long> medicationIds) {
 
-        List<Medication> medications =
-                medicationRepository.findAllById(request.getMedicationIds());
+        List<Medication> meds =
+                medicationRepository.findAllById(medicationIds);
 
         Set<ActiveIngredient> ingredients = new HashSet<>();
-        medications.forEach(m -> ingredients.addAll(m.getIngredients()));
+        for (Medication m : meds) {
+            ingredients.addAll(m.getIngredients());
+        }
 
-        List<InteractionRule> rules = ruleRepository.findAll();
-        StringBuilder summary = new StringBuilder();
+        List<String> interactions = new ArrayList<>();
+        List<ActiveIngredient> list = new ArrayList<>(ingredients);
 
-        for (InteractionRule rule : rules) {
-            if (ingredients.contains(rule.getIngredientA()) &&
-                ingredients.contains(rule.getIngredientB())) {
-
-                summary.append("Interaction: ")
-                       .append(rule.getIngredientA().getName())
-                       .append(" + ")
-                       .append(rule.getIngredientB().getName())
-                       .append(" | Severity: ")
-                       .append(rule.getSeverity())
-                       .append(" | ")
-                       .append(rule.getDescription())
-                       .append("\n");
+        for (int i = 0; i < list.size(); i++) {
+            for (int j = i + 1; j < list.size(); j++) {
+                InteractionRule rule =
+                        ruleRepository.findRuleBetweenIngredients(
+                                list.get(i).getId(),
+                                list.get(j).getId()
+                        );
+                if (rule != null) {
+                    interactions.add(rule.getDescription());
+                }
             }
         }
 
-        if (summary.length() == 0) {
-            summary.append("No interactions found");
-        }
+        String result =
+                interactions.isEmpty()
+                        ? "No interactions found"
+                        : String.join(", ", interactions);
 
-        return resultRepository.save(
-                new InteractionCheckResult(summary.toString())
-        );
-    }
+        InteractionCheckResult saved =
+                new InteractionCheckResult(
+                        medicationIds.toString(), result);
 
-    @Override
-    public InteractionCheckResult getResultById(Long id) {
-        return resultRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Result not found"));
+        resultRepository.save(saved);
+        return result;
     }
 }
