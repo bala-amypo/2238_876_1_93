@@ -1,3 +1,7 @@
+package com.example.demo.model;
+
+import jakarta.persistence.*;
+
 @Entity
 public class InteractionRule {
 
@@ -14,7 +18,7 @@ public class InteractionRule {
     private String severity;
     private String description;
 
-    // ADD ALL THESE 👇
+    public InteractionRule() {}
 
     public void setIngredientA(ActiveIngredient ingredientA) {
         this.ingredientA = ingredientA;
@@ -31,4 +35,9 @@ public class InteractionRule {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    public ActiveIngredient getIngredientA() { return ingredientA; }
+    public ActiveIngredient getIngredientB() { return ingredientB; }
+    public String getSeverity() { return severity; }
+    public String getDescription() { return description; }
 }

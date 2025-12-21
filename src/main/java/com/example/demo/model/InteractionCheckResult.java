@@ -1,3 +1,8 @@
+package com.example.demo.model;
+
+import jakarta.persistence.*;
+import java.time.LocalDateTime;
+
 @Entity
 public class InteractionCheckResult {
 
@@ -9,7 +14,8 @@ public class InteractionCheckResult {
 
     private LocalDateTime checkedAt = LocalDateTime.now();
 
-    // ADD 👇
+    public InteractionCheckResult() {}
+
     public void setInteractions(String interactions) {
         this.interactions = interactions;
     }
