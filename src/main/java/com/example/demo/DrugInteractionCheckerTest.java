@@ -1,4 +1,3 @@
-// src/test/java/com/example/demo/DrugInteractionCheckerTest.java
 package com.example.demo;
 
 import org.mockito.InjectMocks;
@@ -18,11 +17,11 @@ public class DrugInteractionCheckerTest {
     private Object service;
 
     @BeforeMethod
-    void setup() {
+    public void setup() {
         MockitoAnnotations.openMocks(this);
     }
 
     @Test
-    void testSample() {
+    public void testDummy() {
     }
 }
