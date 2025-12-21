@@ -14,6 +14,7 @@ public class UserServiceImpl implements UserService {
     private BCryptPasswordEncoder passwordEncoder;
 
     public UserServiceImpl() {
+        this.passwordEncoder = new BCryptPasswordEncoder();
     }
 
     public UserServiceImpl(UserRepository userRepository,

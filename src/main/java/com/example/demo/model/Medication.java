@@ -1,6 +1,7 @@
 package com.example.demo.model;
 
 import jakarta.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -13,9 +14,13 @@ public class Medication {
     private String name;
 
     @ManyToMany
-    private Set<ActiveIngredient> ingredients;
+    private Set<ActiveIngredient> ingredients = new HashSet<>();
 
     public Medication() {
+    }
+
+    public Medication(String name) {
+        this.name = name;
     }
 
     public Medication(String name, Set<ActiveIngredient> ingredients) {
@@ -27,6 +32,10 @@ public class Medication {
         this.id = id;
         this.name = name;
         this.ingredients = ingredients;
+    }
+
+    public void addIngredient(ActiveIngredient ingredient) {
+        this.ingredients.add(ingredient);
     }
 
     public Long getId() { return id; }
