@@ -1,50 +1,39 @@
-package com.example.demo.entity;
+package com.example.demo.model;
 
 import jakarta.persistence.*;
 
 @Entity
-@Table(
-    name = "interaction_rule",
-    uniqueConstraints = @UniqueConstraint(
-        columnNames = { "ingredient_a_id", "ingredient_b_id" }
-    )
-)
+@Table(name = "interaction_rules",
+       uniqueConstraints = {
+           @UniqueConstraint(columnNames = {"ingredient_a_id", "ingredient_b_id"})
+       })
 public class InteractionRule {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "ingredient_a_id")
+    @ManyToOne
+    @JoinColumn(name = "ingredient_a_id", nullable = false)
     private ActiveIngredient ingredientA;
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "ingredient_b_id")
+    @ManyToOne
+    @JoinColumn(name = "ingredient_b_id", nullable = false)
     private ActiveIngredient ingredientB;
 
-    @Column(nullable = false)
-    private String severity; // MINOR / MODERATE / MAJOR
+    private String severity;
 
-    @Column(nullable = false, length = 500)
     private String description;
 
     public InteractionRule() {
     }
 
-    public InteractionRule(
-            ActiveIngredient ingredientA,
-            ActiveIngredient ingredientB,
-            String severity,
-            String description
-    ) {
-        if (ingredientA.getId() < ingredientB.getId()) {
-            this.ingredientA = ingredientA;
-            this.ingredientB = ingredientB;
-        } else {
-            this.ingredientA = ingredientB;
-            this.ingredientB = ingredientA;
-        }
+    public InteractionRule(ActiveIngredient ingredientA,
+                           ActiveIngredient ingredientB,
+                           String severity,
+                           String description) {
+        this.ingredientA = ingredientA;
+        this.ingredientB = ingredientB;
         this.severity = severity;
         this.description = description;
     }
@@ -67,6 +56,18 @@ public class InteractionRule {
 
     public String getDescription() {
         return description;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setIngredientA(ActiveIngredient ingredientA) {
+        this.ingredientA = ingredientA;
+    }
+
+    public void setIngredientB(ActiveIngredient ingredientB) {
+        this.ingredientB = ingredientB;
     }
 
     public void setSeverity(String severity) {
