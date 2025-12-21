@@ -9,19 +9,22 @@ import com.example.demo.service.RuleService;
 @Service
 public class RuleServiceImpl implements RuleService {
 
-    private final InteractionRuleRepository ruleRepository;
+    private InteractionRuleRepository ruleRepository;
+
+    public RuleServiceImpl() {
+    }
 
     public RuleServiceImpl(InteractionRuleRepository ruleRepository) {
         this.ruleRepository = ruleRepository;
     }
 
     @Override
-    public List<InteractionRule> getRulesByIngredient(Long ingredientId) {
-        return ruleRepository.findByIngredientId(ingredientId);
+    public InteractionRule addRule(InteractionRule rule) {
+        return ruleRepository.save(rule);
     }
 
     @Override
-    public InteractionRule addRule(InteractionRule rule) {
-        return ruleRepository.save(rule);
+    public List<InteractionRule> getRulesByIngredient(Long ingredientId) {
+        return ruleRepository.findByIngredientId(ingredientId);
     }
 }

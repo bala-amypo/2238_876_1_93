@@ -11,8 +11,11 @@ import com.example.demo.service.CatalogService;
 @Service
 public class CatalogServiceImpl implements CatalogService {
 
-    private final MedicationRepository medicationRepository;
-    private final ActiveIngredientRepository ingredientRepository;
+    private MedicationRepository medicationRepository;
+    private ActiveIngredientRepository ingredientRepository;
+
+    public CatalogServiceImpl() {
+    }
 
     public CatalogServiceImpl(MedicationRepository medicationRepository,
                               ActiveIngredientRepository ingredientRepository) {

@@ -23,26 +23,18 @@ public class Medication {
         this.ingredients = ingredients;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public Set<ActiveIngredient> getIngredients() {
-        return ingredients;
-    }
-
-    public void setId(Long id) {
+    public Medication(Long id, String name, Set<ActiveIngredient> ingredients) {
         this.id = id;
-    }
-
-    public void setName(String name) {
         this.name = name;
+        this.ingredients = ingredients;
     }
 
+    public Long getId() { return id; }
+    public String getName() { return name; }
+    public Set<ActiveIngredient> getIngredients() { return ingredients; }
+
+    public void setId(Long id) { this.id = id; }
+    public void setName(String name) { this.name = name; }
     public void setIngredients(Set<ActiveIngredient> ingredients) {
         this.ingredients = ingredients;
     }
