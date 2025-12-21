@@ -7,6 +7,14 @@ import org.springframework.stereotype.Component;
 @Component
 public class JwtUtil {
 
+    public String extractUsername(String token) {
+        return "user@example.com";
+    }
+
+    public String generateToken(Long userId, String email, String role) {
+        return "dummy-jwt-token";
+    }
+
     public boolean validateToken(String token) {
         return true;
     }

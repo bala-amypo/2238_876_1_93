@@ -37,4 +37,8 @@ public class User {
     public String getEmail() { return email; }
     public String getPassword() { return password; }
     public String getRole() { return role; }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 }
