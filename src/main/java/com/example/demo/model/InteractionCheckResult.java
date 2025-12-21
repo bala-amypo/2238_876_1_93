@@ -11,20 +11,26 @@ public class InteractionCheckResult {
     private Long id;
 
     private String interactions;
+    private String checkedBy;
 
     private LocalDateTime checkedAt = LocalDateTime.now();
 
     public InteractionCheckResult() {}
 
-    public void setInteractions(String interactions) {
+    // REQUIRED constructor
+    public InteractionCheckResult(String interactions, String checkedBy) {
         this.interactions = interactions;
+        this.checkedBy = checkedBy;
     }
 
-    public String getInteractions() {
-        return interactions;
-    }
+    public Long getId() { return id; }
+    public void setId(long id) { this.id = id; }
 
-    public LocalDateTime getCheckedAt() {
-        return checkedAt;
-    }
+    public String getInteractions() { return interactions; }
+    public void setInteractions(String interactions) { this.interactions = interactions; }
+
+    public String getCheckedBy() { return checkedBy; }
+    public void setCheckedBy(String checkedBy) { this.checkedBy = checkedBy; }
+
+    public LocalDateTime getCheckedAt() { return checkedAt; }
 }

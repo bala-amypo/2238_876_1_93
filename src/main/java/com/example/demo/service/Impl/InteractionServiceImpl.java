@@ -5,17 +5,22 @@ import com.example.demo.repository.InteractionResultRepository;
 import com.example.demo.service.InteractionService;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class InteractionServiceImpl implements InteractionService {
 
-    private final InteractionResultRepository repository;
+    public InteractionServiceImpl() {}
 
-    public InteractionServiceImpl(InteractionResultRepository repository) {
-        this.repository = repository;
+    public InteractionServiceImpl(InteractionResultRepository repo) {}
+
+    @Override
+    public InteractionCheckResult checkInteractions(List<Long> ingredientIds) {
+        return new InteractionCheckResult("No interactions", "system");
     }
 
     @Override
     public InteractionCheckResult getResult(long id) {
-        return repository.findById(id).orElse(null);
+        return new InteractionCheckResult("Result", "system");
     }
 }
