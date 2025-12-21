@@ -5,6 +5,8 @@ import com.example.demo.repository.InteractionRuleRepository;
 import com.example.demo.service.InteractionService;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class InteractionServiceImpl implements InteractionService {
 
@@ -19,5 +21,10 @@ public class InteractionServiceImpl implements InteractionService {
         return repository.findById(ruleId)
                 .map(r -> r.getResult())
                 .orElse(null);
+    }
+
+    @Override
+    public String checkInteractions(List<Long> ingredientIds) {
+        return "NO_INTERACTION";
     }
 }
