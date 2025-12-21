@@ -1,4 +1,3 @@
-// src/main/java/com/example/demo/model/User.java
 package com.example.demo.model;
 
 import jakarta.persistence.*;
@@ -38,7 +37,9 @@ public class User {
     public String getPassword() { return password; }
     public String getRole() { return role; }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+    public void setId(Long id) { this.id = id; }
+    public void setName(String name) { this.name = name; }
+    public void setEmail(String email) { this.email = email; }
+    public void setPassword(String password) { this.password = password; }
+    public void setRole(String role) { this.role = role; }
 }

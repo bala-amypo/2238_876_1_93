@@ -1,4 +1,3 @@
-// src/main/java/com/example/demo/model/InteractionRule.java
 package com.example.demo.model;
 
 import jakarta.persistence.*;
@@ -16,18 +15,27 @@ public class InteractionRule {
     @ManyToOne
     private ActiveIngredient ingredientB;
 
+    private String severity;
     private String description;
 
     public InteractionRule() {}
 
-    public InteractionRule(ActiveIngredient a, ActiveIngredient b, String description) {
+    public InteractionRule(ActiveIngredient a, ActiveIngredient b, String severity) {
         this.ingredientA = a;
         this.ingredientB = b;
+        this.severity = severity;
+    }
+
+    public InteractionRule(ActiveIngredient a, ActiveIngredient b, String severity, String description) {
+        this.ingredientA = a;
+        this.ingredientB = b;
+        this.severity = severity;
         this.description = description;
     }
 
     public Long getId() { return id; }
-    public ActiveIngredient getIngredientA() { return ingredientA; }
-    public ActiveIngredient getIngredientB() { return ingredientB; }
-    public String getDescription() { return description; }
+    public String getSeverity() { return severity; }
+
+    public void setId(Long id) { this.id = id; }
+    public void setSeverity(String severity) { this.severity = severity; }
 }

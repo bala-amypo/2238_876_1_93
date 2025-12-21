@@ -1,4 +1,3 @@
-// src/main/java/com/example/demo/model/ActiveIngredient.java
 package com.example.demo.model;
 
 import jakarta.persistence.*;
@@ -20,5 +19,7 @@ public class ActiveIngredient {
 
     public Long getId() { return id; }
     public String getName() { return name; }
+
+    public void setId(Long id) { this.id = id; }
     public void setName(String name) { this.name = name; }
 }
