@@ -5,5 +5,7 @@ import java.util.List;
 
 public interface RuleService {
 
+    InteractionRule addRule(InteractionRule rule);
+
     List<InteractionRule> getRulesByIngredient(Long ingredientId);
 }
