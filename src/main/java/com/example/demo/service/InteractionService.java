@@ -4,6 +4,6 @@ import com.example.demo.model.InteractionCheckResult;
 import java.util.List;
 
 public interface InteractionService {
-    InteractionCheckResult checkInteractions(List<Long> ingredientIds);
-    InteractionCheckResult getResult(long id);
+
+    List<InteractionCheckResult> checkInteractions(List<Long> ingredientIds);
 }
