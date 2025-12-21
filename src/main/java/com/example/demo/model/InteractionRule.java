@@ -1,12 +1,9 @@
+// src/main/java/com/example/demo/model/InteractionRule.java
 package com.example.demo.model;
 
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "interaction_rules",
-       uniqueConstraints = {
-           @UniqueConstraint(columnNames = {"ingredient_a_id", "ingredient_b_id"})
-       })
 public class InteractionRule {
 
     @Id
@@ -14,67 +11,23 @@ public class InteractionRule {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "ingredient_a_id", nullable = false)
     private ActiveIngredient ingredientA;
 
     @ManyToOne
-    @JoinColumn(name = "ingredient_b_id", nullable = false)
     private ActiveIngredient ingredientB;
-
-    private String severity;
 
     private String description;
 
-    public InteractionRule() {
-    }
+    public InteractionRule() {}
 
-    public InteractionRule(ActiveIngredient ingredientA,
-                           ActiveIngredient ingredientB,
-                           String severity,
-                           String description) {
-        this.ingredientA = ingredientA;
-        this.ingredientB = ingredientB;
-        this.severity = severity;
+    public InteractionRule(ActiveIngredient a, ActiveIngredient b, String description) {
+        this.ingredientA = a;
+        this.ingredientB = b;
         this.description = description;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public ActiveIngredient getIngredientA() {
-        return ingredientA;
-    }
-
-    public ActiveIngredient getIngredientB() {
-        return ingredientB;
-    }
-
-    public String getSeverity() {
-        return severity;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public void setIngredientA(ActiveIngredient ingredientA) {
-        this.ingredientA = ingredientA;
-    }
-
-    public void setIngredientB(ActiveIngredient ingredientB) {
-        this.ingredientB = ingredientB;
-    }
-
-    public void setSeverity(String severity) {
-        this.severity = severity;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
+    public Long getId() { return id; }
+    public ActiveIngredient getIngredientA() { return ingredientA; }
+    public ActiveIngredient getIngredientB() { return ingredientB; }
+    public String getDescription() { return description; }
 }

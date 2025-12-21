@@ -1,3 +1,4 @@
+// src/main/java/com/example/demo/model/Medication.java
 package com.example.demo.model;
 
 import jakarta.persistence.*;
@@ -14,37 +15,28 @@ public class Medication {
     private String name;
 
     @ManyToMany
-    private Set<ActiveIngredient> ingredients = new HashSet<>();
+    private Set<ActiveIngredient> activeIngredients = new HashSet<>();
 
-    public Medication() {
-    }
+    public Medication() {}
 
     public Medication(String name) {
         this.name = name;
     }
 
-    public Medication(String name, Set<ActiveIngredient> ingredients) {
+    public Medication(String name, Set<ActiveIngredient> activeIngredients) {
         this.name = name;
-        this.ingredients = ingredients;
-    }
-
-    public Medication(Long id, String name, Set<ActiveIngredient> ingredients) {
-        this.id = id;
-        this.name = name;
-        this.ingredients = ingredients;
+        this.activeIngredients = activeIngredients;
     }
 
     public void addIngredient(ActiveIngredient ingredient) {
-        this.ingredients.add(ingredient);
+        activeIngredients.add(ingredient);
+    }
+
+    public void removeIngredient(ActiveIngredient ingredient) {
+        activeIngredients.remove(ingredient);
     }
 
     public Long getId() { return id; }
     public String getName() { return name; }
-    public Set<ActiveIngredient> getIngredients() { return ingredients; }
-
-    public void setId(Long id) { this.id = id; }
-    public void setName(String name) { this.name = name; }
-    public void setIngredients(Set<ActiveIngredient> ingredients) {
-        this.ingredients = ingredients;
-    }
+    public Set<ActiveIngredient> getActiveIngredients() { return activeIngredients; }
 }
