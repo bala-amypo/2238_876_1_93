@@ -3,31 +3,27 @@ package com.example.demo.model;
 import jakarta.persistence.*;
 
 @Entity
-public class ActiveIngredient {
+public class InteractionCheckResult {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
+    private String severity;
+    private String message;
 
-    public ActiveIngredient() {}
+    public InteractionCheckResult() {}
 
-    public ActiveIngredient(Long id, String name) {
-        this.id = id;
-        this.name = name;
-    }
-
-    // ✅ REQUIRED BY TESTS
-    public ActiveIngredient(String name) {
-        this.name = name;
+    public InteractionCheckResult(String severity, String message) {
+        this.severity = severity;
+        this.message = message;
     }
 
     public Long getId() { return id; }
-    public String getName() { return name; }
+    public String getSeverity() { return severity; }
+    public String getMessage() { return message; }
 
-    // ✅ REQUIRED BY SERVICE
-    public void setName(String name) {
-        this.name = name;
+    public void setId(Long id) {
+        this.id = id;
     }
 }

@@ -1,31 +1,9 @@
-package com.example.demo.model;
+package com.example.demo.service;
 
-import jakarta.persistence.*;
+import com.example.demo.model.InteractionCheckResult;
+import java.util.List;
 
-@Entity
-public class InteractionCheckResult {
+public interface InteractionService {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    private String severity;
-    private String message;
-
-    public InteractionCheckResult() {}
-
-    // ✅ REQUIRED BY TESTS
-    public InteractionCheckResult(String severity, String message) {
-        this.severity = severity;
-        this.message = message;
-    }
-
-    public Long getId() { return id; }
-    public String getSeverity() { return severity; }
-    public String getMessage() { return message; }
-
-    // ✅ REQUIRED BY TESTS
-    public void setId(Long id) {
-        this.id = id;
-    }
+    InteractionCheckResult checkInteractions(List<Long> ingredientIds);
 }

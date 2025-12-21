@@ -18,7 +18,6 @@ public class ActiveIngredient {
         this.name = name;
     }
 
-    // ✅ REQUIRED BY TESTS
     public ActiveIngredient(String name) {
         this.name = name;
     }
@@ -26,7 +25,6 @@ public class ActiveIngredient {
     public Long getId() { return id; }
     public String getName() { return name; }
 
-    // ✅ REQUIRED BY SERVICE
     public void setName(String name) {
         this.name = name;
     }
