@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import java.util.Set;
 
 @Entity
-@Table(name = "medications")
 public class Medication {
 
     @Id
@@ -14,11 +13,6 @@ public class Medication {
     private String name;
 
     @ManyToMany
-    @JoinTable(
-            name = "medication_ingredients",
-            joinColumns = @JoinColumn(name = "medication_id"),
-            inverseJoinColumns = @JoinColumn(name = "ingredient_id")
-    )
     private Set<ActiveIngredient> ingredients;
 
     public Medication() {

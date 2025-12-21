@@ -3,7 +3,6 @@ package com.example.demo.service.impl;
 import com.example.demo.model.User;
 import com.example.demo.repository.UserRepository;
 import com.example.demo.service.UserService;
-
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -13,8 +12,7 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder encoder;
 
-    public UserServiceImpl(UserRepository userRepository,
-                           BCryptPasswordEncoder encoder) {
+    public UserServiceImpl(UserRepository userRepository, BCryptPasswordEncoder encoder) {
         this.userRepository = userRepository;
         this.encoder = encoder;
     }
@@ -26,11 +24,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User login(String email, String password) {
-        User user = userRepository.findByEmail(email);
-        if (user == null || !encoder.matches(password, user.getPassword())) {
-            return null;
-        }
-        return user;
+    public User login(String email, String rawPassword) {
+        return userRepository.findByEmail(email)
+                .filter(u -> encoder.matches(rawPassword, u.getPassword()))
+                .orElse(null);
     }
 }
