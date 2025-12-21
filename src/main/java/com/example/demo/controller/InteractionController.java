@@ -2,6 +2,9 @@ package com.example.demo.controller;
 
 import com.example.demo.service.InteractionService;
 
+import com.example.demo.model.InteractionCheckResult;
+
+
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,7 +20,7 @@ public class InteractionController {
     }
 
     @PostMapping("/check")
-    public String checkInteractions(@RequestBody List<Long> medicationIds) {
+    public InteractionCheckResult checkInteractions(@RequestBody List<Long> medicationIds) {
         return interactionService.checkInteractions(medicationIds);
     }
 }
