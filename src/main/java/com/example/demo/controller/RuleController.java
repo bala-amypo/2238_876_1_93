@@ -1,13 +1,14 @@
 package com.example.demo.controller;
 
-import com.example.demo.entity.InteractionRule;
+import com.example.demo.model.InteractionRule;
 import com.example.demo.service.RuleService;
+
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/rules")
+@RequestMapping("/api/rules")
 public class RuleController {
 
     private final RuleService ruleService;
@@ -21,8 +22,8 @@ public class RuleController {
         return ruleService.addRule(rule);
     }
 
-    @GetMapping
-    public List<InteractionRule> getAllRules() {
-        return ruleService.getAllRules();
+    @GetMapping("/ingredient/{id}")
+    public List<InteractionRule> getRulesByIngredient(@PathVariable Long id) {
+        return ruleService.getRulesByIngredient(id);
     }
 }
