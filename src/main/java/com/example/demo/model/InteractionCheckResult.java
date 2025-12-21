@@ -1,44 +1,33 @@
 package com.example.demo.model;
 
 import jakarta.persistence.*;
-import java.time.LocalDateTime;
 
 @Entity
-public class InteractionCheckResult {
+public class ActiveIngredient {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String interactions;
-    private String severity;
+    private String name;
 
-    private LocalDateTime checkedAt;
+    public ActiveIngredient() {}
 
-    public InteractionCheckResult() {}
+    public ActiveIngredient(Long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
 
-    // ✅ REQUIRED by tests
-    public InteractionCheckResult(String interactions, String severity) {
-        this.interactions = interactions;
-        this.severity = severity;
-        this.checkedAt = LocalDateTime.now();
+    // ✅ REQUIRED BY TESTS
+    public ActiveIngredient(String name) {
+        this.name = name;
     }
 
     public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }   // ✅ REQUIRED
+    public String getName() { return name; }
 
-    public String getInteractions() { return interactions; }
-    public void setInteractions(String interactions) {
-        this.interactions = interactions;
-    }
-
-    public String getSeverity() { return severity; }
-    public void setSeverity(String severity) {
-        this.severity = severity;
-    }
-
-    public LocalDateTime getCheckedAt() { return checkedAt; }
-    public void setCheckedAt(LocalDateTime checkedAt) {
-        this.checkedAt = checkedAt;
+    // ✅ REQUIRED BY SERVICE
+    public void setName(String name) {
+        this.name = name;
     }
 }

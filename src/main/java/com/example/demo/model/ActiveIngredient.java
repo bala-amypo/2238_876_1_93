@@ -13,19 +13,21 @@ public class ActiveIngredient {
 
     public ActiveIngredient() {}
 
-    // ✅ REQUIRED
-    public ActiveIngredient(String name) {
-        this.name = name;
-    }
-
     public ActiveIngredient(Long id, String name) {
         this.id = id;
         this.name = name;
     }
 
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
+    // ✅ REQUIRED BY TESTS
+    public ActiveIngredient(String name) {
+        this.name = name;
+    }
 
+    public Long getId() { return id; }
     public String getName() { return name; }
-    public void setName(String name) { this.name = name; }
+
+    // ✅ REQUIRED BY SERVICE
+    public void setName(String name) {
+        this.name = name;
+    }
 }
