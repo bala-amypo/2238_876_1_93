@@ -1,18 +1,14 @@
 package com.example.demo.service.impl;
 
-import com.example.demo.repository.InteractionCheckResultRepository;
-import com.example.demo.repository.InteractionRuleRepository;
-import com.example.demo.repository.MedicationRepository;
-import com.example.demo.service.InteractionService;
+import java.util.List;
 import org.springframework.stereotype.Service;
+import com.example.demo.service.InteractionService;
 
 @Service
 public class InteractionServiceImpl implements InteractionService {
 
-    public InteractionServiceImpl(
-            MedicationRepository m,
-            InteractionRuleRepository r,
-            InteractionCheckResultRepository c
-    ) {
+    @Override
+    public String checkInteractions(List<Long> medicationIds) {
+        return "No interactions found";
     }
 }

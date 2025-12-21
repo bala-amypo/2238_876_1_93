@@ -1,13 +1,22 @@
 package com.example.demo.service.impl;
 
-import com.example.demo.repository.ActiveIngredientRepository;
+import java.util.List;
+import org.springframework.stereotype.Service;
+import com.example.demo.model.Medication;
 import com.example.demo.repository.MedicationRepository;
 import com.example.demo.service.CatalogService;
-import org.springframework.stereotype.Service;
 
 @Service
 public class CatalogServiceImpl implements CatalogService {
 
-    public CatalogServiceImpl(ActiveIngredientRepository a, MedicationRepository m) {
+    private final MedicationRepository medicationRepository;
+
+    public CatalogServiceImpl(MedicationRepository medicationRepository) {
+        this.medicationRepository = medicationRepository;
+    }
+
+    @Override
+    public List<Medication> getAllMedications() {
+        return medicationRepository.findAll();
     }
 }
