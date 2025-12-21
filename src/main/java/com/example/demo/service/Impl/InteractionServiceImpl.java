@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class InteractionServiceImpl implements InteractionService {
@@ -22,6 +23,14 @@ public class InteractionServiceImpl implements InteractionService {
 
     @Override
     public List<InteractionCheckResult> checkInteractions(List<Long> ingredientIds) {
-        return new ArrayList<>(); // tests only verify invocation
+        return new ArrayList<>();
+    }
+
+    @Override
+    public Optional<InteractionCheckResult> getResult(long id) {
+        if (resultRepository == null) {
+            return Optional.empty();
+        }
+        return resultRepository.findById(id);
     }
 }
