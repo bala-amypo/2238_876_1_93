@@ -5,8 +5,6 @@ import com.example.demo.service.InteractionService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
-
 @RestController
 @RequestMapping("/api/interactions")
 public class InteractionController {
@@ -19,10 +17,8 @@ public class InteractionController {
 
     @GetMapping("/{id}")
     public ResponseEntity<InteractionCheckResult> getResult(@PathVariable long id) {
-        Optional<InteractionCheckResult> result = service.getResult(id);
-
-        return result
+        return service.getResult(id)
                 .map(ResponseEntity::ok)
-                .orElseGet(() -> ResponseEntity.notFound().build());
+                .orElse(ResponseEntity.notFound().build());
     }
 }
