@@ -21,4 +21,9 @@ public class RuleServiceImpl implements RuleService {
     public List<InteractionRule> getRulesByIngredient(Long ingredientId) {
         return repository.findByIngredientA_IdOrIngredientB_Id(ingredientId, ingredientId);
     }
+
+    @Override
+    public InteractionRule addRule(InteractionRule rule) {
+        return repository.save(rule);
+    }
 }
