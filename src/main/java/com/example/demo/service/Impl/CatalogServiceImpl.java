@@ -19,4 +19,9 @@ public class CatalogServiceImpl implements CatalogService {
     public List<Medication> getAllMedications() {
         return medicationRepository.findAll();
     }
+
+    @Override
+    public Medication addMedication(Medication medication) {
+        return medicationRepository.save(medication);
+    }
 }
