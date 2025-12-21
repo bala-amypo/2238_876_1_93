@@ -12,12 +12,10 @@ public class InteractionServiceImpl implements InteractionService {
 
     private final InteractionCheckResultRepository repository;
 
-    // ✅ REQUIRED BY SPRING
     public InteractionServiceImpl(InteractionCheckResultRepository repository) {
         this.repository = repository;
     }
 
-    // ✅ REQUIRED BY TESTS (Mockito can mock this)
     @Override
     public InteractionCheckResult checkInteractions(List<Long> ingredientIds) {
         return new InteractionCheckResult("NONE", "No interaction");
