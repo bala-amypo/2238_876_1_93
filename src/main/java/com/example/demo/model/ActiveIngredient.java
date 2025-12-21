@@ -1,12 +1,11 @@
-package com.example.demo.entity;
+package com.example.demo.model;
 
 import jakarta.persistence.*;
 
 @Entity
-@Table(
-    name = "active_ingredient",
-    uniqueConstraints = @UniqueConstraint(columnNames = "name")
-)
+@Table(name = "active_ingredients", uniqueConstraints = {
+        @UniqueConstraint(columnNames = "name")
+})
 public class ActiveIngredient {
 
     @Id
@@ -27,12 +26,12 @@ public class ActiveIngredient {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public String getName() {
         return name;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public void setName(String name) {

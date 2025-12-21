@@ -1,29 +1,25 @@
-package com.example.demo.entity;
+package com.example.demo.model;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotEmpty;
-import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "medication")
+@Table(name = "medications")
 public class Medication {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
     private String name;
 
     @ManyToMany
     @JoinTable(
-        name = "medication_active_ingredient",
-        joinColumns = @JoinColumn(name = "medication_id"),
-        inverseJoinColumns = @JoinColumn(name = "active_ingredient_id")
+            name = "medication_ingredients",
+            joinColumns = @JoinColumn(name = "medication_id"),
+            inverseJoinColumns = @JoinColumn(name = "ingredient_id")
     )
-    @NotEmpty(message = "Medication must include at least one active ingredient")
-    private Set<ActiveIngredient> ingredients = new HashSet<>();
+    private Set<ActiveIngredient> ingredients;
 
     public Medication() {
     }
@@ -37,20 +33,20 @@ public class Medication {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public Set<ActiveIngredient> getIngredients() {
         return ingredients;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public void setIngredients(Set<ActiveIngredient> ingredients) {
