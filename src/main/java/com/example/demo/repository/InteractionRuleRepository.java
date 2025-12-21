@@ -3,10 +3,10 @@ package com.example.demo.repository;
 import com.example.demo.model.InteractionRule;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.Optional;
+import java.util.List;
 
 public interface InteractionRuleRepository
         extends JpaRepository<InteractionRule, Long> {
 
-    Optional<InteractionRule> findRuleBetweenIngredients(Long ingredientAId, Long ingredientBId);
+    List<InteractionRule> findByIngredientA_IdOrIngredientB_Id(Long a, Long b);
 }
