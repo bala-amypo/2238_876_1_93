@@ -1,8 +1,5 @@
 package com.example.demo.controller;
 
-import com.example.demo.dto.AuthRequest;
-import com.example.demo.dto.AuthResponse;
-import com.example.demo.dto.RegisterRequest;
 import com.example.demo.model.User;
 import com.example.demo.service.UserService;
 import com.example.demo.util.JwtUtil;
@@ -22,38 +19,14 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<?> register(@RequestBody RegisterRequest request) {
-
-        String role = request.getRole() != null ? request.getRole() : "USER";
-
-        User user = new User(
-                request.getName(),
-                request.getEmail(),
-                request.getPassword(),
-                role
-        );
-
+    public ResponseEntity<User> register(@RequestBody User user) {
         return ResponseEntity.ok(userService.register(user));
     }
 
     @PostMapping("/login")
-    public ResponseEntity<AuthResponse> login(@RequestBody AuthRequest request) {
-
-        User user = userService.login(
-                request.getEmail(),
-                request.getPassword()
-        );
-
-        if (user == null) {
-            return ResponseEntity.status(401).build();
-        }
-
-        String token = jwtUtil.generateToken(
-                user.getId(),
-                user.getEmail(),
-                user.getRole()
-        );
-
-        return ResponseEntity.ok(new AuthResponse(token));
+    public ResponseEntity<String> login(@RequestBody User user) {
+        User loggedIn = userService.login(user.getEmail(), user.getPassword());
+        String token = jwtUtil.generateToken(loggedIn.getEmail(), loggedIn.getRole());
+        return ResponseEntity.ok(token);
     }
 }

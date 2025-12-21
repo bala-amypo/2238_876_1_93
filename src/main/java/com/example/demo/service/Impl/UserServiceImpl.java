@@ -1,41 +1,41 @@
 package com.example.demo.service.impl;
 
-import java.util.Optional;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.stereotype.Service;
 import com.example.demo.model.User;
 import com.example.demo.repository.UserRepository;
 import com.example.demo.service.UserService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Service;
 
 @Service
 public class UserServiceImpl implements UserService {
 
-    private UserRepository userRepository;
-    private BCryptPasswordEncoder passwordEncoder;
-
-    public UserServiceImpl() {
-        this.passwordEncoder = new BCryptPasswordEncoder();
-    }
+    private final UserRepository userRepository;
+    private final BCryptPasswordEncoder encoder;
 
     public UserServiceImpl(UserRepository userRepository,
-                           BCryptPasswordEncoder passwordEncoder) {
+                           BCryptPasswordEncoder encoder) {
         this.userRepository = userRepository;
-        this.passwordEncoder = passwordEncoder;
+        this.encoder = encoder;
     }
 
     @Override
     public User register(User user) {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setPassword(encoder.encode(user.getPassword()));
         return userRepository.save(user);
     }
 
     @Override
     public User login(String email, String password) {
-        Optional<User> userOpt = userRepository.findByEmail(email);
-        if (userOpt.isPresent()
-                && passwordEncoder.matches(password, userOpt.get().getPassword())) {
-            return userOpt.get();
+        User user = findByEmail(email);
+        if (!encoder.matches(password, user.getPassword())) {
+            throw new RuntimeException("Invalid credentials");
         }
-        return null;
+        return user;
+    }
+
+    @Override
+    public User findByEmail(String email) {
+        return userRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("User not found"));
     }
 }
