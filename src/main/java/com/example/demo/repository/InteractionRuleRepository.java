@@ -1,4 +1,3 @@
-// src/main/java/com/example/demo/repository/InteractionRuleRepository.java
 package com.example.demo.repository;
 
 import com.example.demo.model.InteractionRule;
@@ -7,5 +6,9 @@ import java.util.List;
 
 public interface InteractionRuleRepository extends JpaRepository<InteractionRule, Long> {
 
-    List<InteractionRule> findByIngredientId(Long ingredientId);
+    List<InteractionRule> findByIngredientA_Id(Long ingredientId);
+
+    List<InteractionRule> findByIngredientB_Id(Long ingredientId);
+
+    List<InteractionRule> findByIngredientA_IdOrIngredientB_Id(Long ingredientAId, Long ingredientBId);
 }

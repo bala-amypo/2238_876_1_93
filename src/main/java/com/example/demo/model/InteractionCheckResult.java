@@ -1,4 +1,3 @@
-// src/main/java/com/example/demo/model/InteractionCheckResult.java
 package com.example.demo.model;
 
 import jakarta.persistence.*;
@@ -11,6 +10,7 @@ public class InteractionCheckResult {
     private Long id;
 
     private String result;
+    private String severity;
 
     public InteractionCheckResult() {}
 
@@ -18,6 +18,14 @@ public class InteractionCheckResult {
         this.result = result;
     }
 
+    public InteractionCheckResult(String result, String severity) {
+        this.result = result;
+        this.severity = severity;
+    }
+
     public Long getId() { return id; }
-    public String getResult() { return result; }
+    public String getSeverity() { return severity; }
+
+    public void setId(Long id) { this.id = id; }
+    public void setSeverity(String severity) { this.severity = severity; }
 }
