@@ -1,15 +1,14 @@
 package com.example.demo.controller;
 
+import com.example.demo.dto.AuthRequest;
+import com.example.demo.dto.AuthResponse;
+import com.example.demo.dto.RegisterRequest;
 import com.example.demo.model.User;
 import com.example.demo.service.UserService;
 import com.example.demo.util.JwtUtil;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.HashMap;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/auth")
@@ -18,25 +17,31 @@ public class AuthController {
     private final UserService userService;
     private final JwtUtil jwtUtil;
 
-    public AuthController(UserService userService,
-                          JwtUtil jwtUtil,
-                          AuthenticationManager authManager) {
+    public AuthController(UserService userService, JwtUtil jwtUtil) {
         this.userService = userService;
         this.jwtUtil = jwtUtil;
     }
 
     @PostMapping("/register")
-    public ResponseEntity<User> register(@RequestBody User user) {
-        return ResponseEntity.ok(userService.register(user));
+    public ResponseEntity<?> register(@RequestBody RegisterRequest request) {
+
+        User user = new User(
+                request.getName(),
+                request.getEmail(),
+                request.getPassword(),
+                request.getRole()
+        );
+
+        User savedUser = userService.register(user);
+        return ResponseEntity.ok(savedUser);
     }
 
     @PostMapping("/login")
-    public ResponseEntity<Map<String, String>> login(
-            @RequestBody Map<String, String> request) {
+    public ResponseEntity<AuthResponse> login(@RequestBody AuthRequest request) {
 
         User user = userService.login(
-                request.get("email"),
-                request.get("password")
+                request.getEmail(),
+                request.getPassword()
         );
 
         if (user == null) {
@@ -49,8 +54,6 @@ public class AuthController {
                 user.getRole()
         );
 
-        Map<String, String> response = new HashMap<>();
-        response.put("token", token);
-        return ResponseEntity.ok(response);
+        return ResponseEntity.ok(new AuthResponse(token));
     }
 }
