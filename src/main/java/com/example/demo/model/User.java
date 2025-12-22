@@ -17,7 +17,6 @@ public class User {
 
     public User() {}
 
-    // REQUIRED by tests
     public User(String name, String email, String role) {
         this.name = name;
         this.email = email;
@@ -28,8 +27,6 @@ public class User {
         this.name = name;
         this.email = email;
     }
-
-    // getters/setters REQUIRED by tests
     public Long getId() { return id; }
     public void setId(long id) { this.id = id; }
 
