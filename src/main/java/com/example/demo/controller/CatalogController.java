@@ -27,19 +27,4 @@ public class CatalogController {
     public ResponseEntity<?> getAllMedications() {
         return ResponseEntity.ok(catalogService.getAllMedications());
     }
-
-    @PutMapping("/medications/{id}")
-    public ResponseEntity<Medication> updateMedication(
-            @PathVariable Long id,
-            @RequestBody Medication medication
-    ) {
-        medication.setId(id);
-        return ResponseEntity.ok(catalogService.addMedication(medication));
-    }
-
-    @DeleteMapping("/medications/{id}")
-    public ResponseEntity<Void> deleteMedication(@PathVariable Long id) {
-        catalogService.deleteMedication(id);
-        return ResponseEntity.noContent().build();
-    }
 }
