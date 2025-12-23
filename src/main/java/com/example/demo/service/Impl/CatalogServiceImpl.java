@@ -11,14 +11,13 @@ import com.example.demo.service.CatalogService;
 @Service
 public class CatalogServiceImpl implements CatalogService {
 
-    private MedicationRepository medicationRepository;
-    private ActiveIngredientRepository ingredientRepository;
+    private final MedicationRepository medicationRepository;
+    private final ActiveIngredientRepository ingredientRepository;
 
-    public CatalogServiceImpl() {
-    }
-
-    public CatalogServiceImpl(MedicationRepository medicationRepository,
-                              ActiveIngredientRepository ingredientRepository) {
+    public CatalogServiceImpl(
+            MedicationRepository medicationRepository,
+            ActiveIngredientRepository ingredientRepository
+    ) {
         this.medicationRepository = medicationRepository;
         this.ingredientRepository = ingredientRepository;
     }
@@ -35,8 +34,7 @@ public class CatalogServiceImpl implements CatalogService {
 
     @Override
     public ActiveIngredient addIngredient(String name) {
-        ActiveIngredient ingredient = new ActiveIngredient();
-        ingredient.setName(name);
+        ActiveIngredient ingredient = new ActiveIngredient(name);
         return ingredientRepository.save(ingredient);
     }
 }

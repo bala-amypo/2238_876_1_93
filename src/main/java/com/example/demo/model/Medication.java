@@ -13,7 +13,12 @@ public class Medication {
 
     private String name;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+        name = "medication_ingredients",
+        joinColumns = @JoinColumn(name = "medication_id"),
+        inverseJoinColumns = @JoinColumn(name = "ingredient_id")
+    )
     private Set<ActiveIngredient> ingredients = new HashSet<>();
 
     public Medication() {}
@@ -33,13 +38,7 @@ public class Medication {
 
     public void setId(Long id) { this.id = id; }
     public void setName(String name) { this.name = name; }
-    public void setIngredients(Set<ActiveIngredient> ingredients) { this.ingredients = ingredients; }
-
-    public void addIngredient(ActiveIngredient ingredient) {
-        this.ingredients.add(ingredient);
-    }
-
-    public void removeIngredient(ActiveIngredient ingredient) {
-        this.ingredients.remove(ingredient);
+    public void setIngredients(Set<ActiveIngredient> ingredients) {
+        this.ingredients = ingredients;
     }
 }
