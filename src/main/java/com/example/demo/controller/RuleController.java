@@ -30,14 +30,4 @@ public class RuleController {
     public InteractionRule getRuleById(@PathVariable Long id) {
         return ruleService.getRuleById(id);
     }
-
-    @PutMapping("/{id}")
-    public InteractionRule updateRule(@PathVariable Long id, @RequestBody InteractionRule rule) {
-        return ruleService.updateRule(id, rule);
-    }
-
-    @DeleteMapping("/{id}")
-    public void deleteRule(@PathVariable Long id) {
-        ruleService.deleteRule(id);
-    }
 }
