@@ -1,7 +1,10 @@
 package com.example.demo.service.impl;
 
 import java.util.List;
+
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.example.demo.model.ActiveIngredient;
 import com.example.demo.model.Medication;
 import com.example.demo.repository.ActiveIngredientRepository;
@@ -27,6 +30,7 @@ public class CatalogServiceImpl implements CatalogService {
         return medicationRepository.findAll();
     }
 
+    @Transactional
     @Override
     public Medication addMedication(Medication medication) {
         return medicationRepository.save(medication);
