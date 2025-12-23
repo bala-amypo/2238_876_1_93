@@ -1,14 +1,13 @@
 package com.example.demo.service.impl;
 
-import java.util.List;
-
-import org.springframework.stereotype.Service;
-
 import com.example.demo.model.ActiveIngredient;
 import com.example.demo.model.Medication;
 import com.example.demo.repository.ActiveIngredientRepository;
 import com.example.demo.repository.MedicationRepository;
 import com.example.demo.service.CatalogService;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class CatalogServiceImpl implements CatalogService {
@@ -30,13 +29,13 @@ public class CatalogServiceImpl implements CatalogService {
     }
 
     @Override
-    public ActiveIngredient addIngredient(String name) {
-        ActiveIngredient ingredient = new ActiveIngredient(name);
-        return ingredientRepository.save(ingredient);
+    public List<Medication> getAllMedications() {
+        return medicationRepository.findAll();
     }
 
     @Override
-    public List<Medication> getAllMedications() {
-        return medicationRepository.findAll();
+    public ActiveIngredient addIngredient(String name) {
+        ActiveIngredient ingredient = new ActiveIngredient(name);
+        return ingredientRepository.save(ingredient);
     }
 }
