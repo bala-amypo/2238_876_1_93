@@ -7,7 +7,6 @@ import jakarta.persistence.*;
 public class User {
 
     @Id
-    
     private Long id;
 
     private String name;
