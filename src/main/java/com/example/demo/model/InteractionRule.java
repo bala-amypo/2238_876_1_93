@@ -6,7 +6,7 @@ import jakarta.persistence.*;
 public class InteractionRule {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    
     private Long id;
 
     @ManyToOne

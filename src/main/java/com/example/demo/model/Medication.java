@@ -8,7 +8,7 @@ import java.util.Set;
 public class Medication {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    
     private Long id;
 
     private String name;
