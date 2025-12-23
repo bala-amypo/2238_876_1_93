@@ -13,19 +13,15 @@ public class Medication {
 
     private String name;
 
-    @ManyToMany(cascade = CascadeType.PERSIST)
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+        name = "medication_ingredient",
+        joinColumns = @JoinColumn(name = "medication_id"),
+        inverseJoinColumns = @JoinColumn(name = "ingredient_id")
+    )
     private Set<ActiveIngredient> ingredients = new HashSet<>();
 
     public Medication() {}
-
-    public Medication(String name) {
-        this.name = name;
-    }
-
-    public Medication(String name, Set<ActiveIngredient> ingredients) {
-        this.name = name;
-        this.ingredients = ingredients;
-    }
 
     public Long getId() { return id; }
     public String getName() { return name; }
