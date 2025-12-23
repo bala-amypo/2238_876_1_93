@@ -3,7 +3,6 @@ package com.example.demo.service.impl;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.model.ActiveIngredient;
 import com.example.demo.model.Medication;
@@ -26,12 +25,6 @@ public class CatalogServiceImpl implements CatalogService {
     }
 
     @Override
-    public List<Medication> getAllMedications() {
-        return medicationRepository.findAll();
-    }
-
-    @Transactional
-    @Override
     public Medication addMedication(Medication medication) {
         return medicationRepository.save(medication);
     }
@@ -40,5 +33,10 @@ public class CatalogServiceImpl implements CatalogService {
     public ActiveIngredient addIngredient(String name) {
         ActiveIngredient ingredient = new ActiveIngredient(name);
         return ingredientRepository.save(ingredient);
+    }
+
+    @Override
+    public List<Medication> getAllMedications() {
+        return medicationRepository.findAll();
     }
 }

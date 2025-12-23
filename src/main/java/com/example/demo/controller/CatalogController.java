@@ -1,34 +1,42 @@
-package com.example.demo.controller;
+package com.example.demo.service.impl;
 
 import java.util.List;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.stereotype.Service;
 
+import com.example.demo.model.ActiveIngredient;
 import com.example.demo.model.Medication;
+import com.example.demo.repository.ActiveIngredientRepository;
+import com.example.demo.repository.MedicationRepository;
 import com.example.demo.service.CatalogService;
 
-@RestController
-@RequestMapping("/api/catalog")
-public class CatalogController {
+@Service
+public class CatalogServiceImpl implements CatalogService {
 
-    private final CatalogService catalogService;
+    private final MedicationRepository medicationRepository;
+    private final ActiveIngredientRepository ingredientRepository;
 
-    public CatalogController(CatalogService catalogService) {
-        this.catalogService = catalogService;
-    }
-
-    @PostMapping("/medications")
-    public ResponseEntity<Medication> addMedication(
-            @RequestBody Medication medication
+    public CatalogServiceImpl(
+            MedicationRepository medicationRepository,
+            ActiveIngredientRepository ingredientRepository
     ) {
-        Medication saved = catalogService.addMedication(medication);
-        return new ResponseEntity<>(saved, HttpStatus.CREATED);
+        this.medicationRepository = medicationRepository;
+        this.ingredientRepository = ingredientRepository;
     }
 
-    @GetMapping("/medications")
+    @Override
+    public Medication addMedication(Medication medication) {
+        return medicationRepository.save(medication);
+    }
+
+    @Override
+    public ActiveIngredient addIngredient(String name) {
+        ActiveIngredient ingredient = new ActiveIngredient(name);
+        return ingredientRepository.save(ingredient);
+    }
+
+    @Override
     public List<Medication> getAllMedications() {
-        return catalogService.getAllMedications();
+        return medicationRepository.findAll();
     }
 }
