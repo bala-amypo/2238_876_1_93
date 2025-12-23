@@ -1,12 +1,13 @@
 package com.example.demo.controller;
 
-import com.example.demo.model.ActiveIngredient;
-import com.example.demo.model.Medication;
-import com.example.demo.service.CatalogService;
+import java.util.List;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import com.example.demo.model.Medication;
+import com.example.demo.service.CatalogService;
 
 @RestController
 @RequestMapping("/api/catalog")
@@ -18,14 +19,12 @@ public class CatalogController {
         this.catalogService = catalogService;
     }
 
-    @PostMapping("/ingredients")
-    public ActiveIngredient addIngredient(@RequestParam String name) {
-        return catalogService.addIngredient(name);
-    }
-
     @PostMapping("/medications")
-    public Medication addMedication(@RequestBody Medication medication) {
-        return catalogService.addMedication(medication);
+    public ResponseEntity<Medication> addMedication(
+            @RequestBody Medication medication
+    ) {
+        Medication saved = catalogService.addMedication(medication);
+        return new ResponseEntity<>(saved, HttpStatus.CREATED);
     }
 
     @GetMapping("/medications")
