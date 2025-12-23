@@ -13,12 +13,7 @@ public class Medication {
 
     private String name;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(
-        name = "medication_ingredients",
-        joinColumns = @JoinColumn(name = "medication_id"),
-        inverseJoinColumns = @JoinColumn(name = "ingredient_id")
-    )
+    @ManyToMany(cascade = CascadeType.PERSIST)
     private Set<ActiveIngredient> ingredients = new HashSet<>();
 
     public Medication() {}
