@@ -4,8 +4,6 @@ import com.example.demo.model.InteractionRule;
 import com.example.demo.service.RuleService;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
 @RequestMapping("/rules")
 public class RuleController {
@@ -19,15 +17,5 @@ public class RuleController {
     @PostMapping
     public InteractionRule addRule(@RequestBody InteractionRule rule) {
         return ruleService.addRule(rule);
-    }
-
-    @GetMapping
-    public List<InteractionRule> getAllRules() {
-        return ruleService.getAllRules();
-    }
-
-    @GetMapping("/{id}")
-    public InteractionRule getRuleById(@PathVariable Long id) {
-        return ruleService.getRuleById(id);
     }
 }
