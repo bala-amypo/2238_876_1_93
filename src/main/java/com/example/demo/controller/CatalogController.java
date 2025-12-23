@@ -1,42 +1,30 @@
-package com.example.demo.service.impl;
+package com.example.demo.controller;
 
-import java.util.List;
-
-import org.springframework.stereotype.Service;
-
-import com.example.demo.model.ActiveIngredient;
 import com.example.demo.model.Medication;
-import com.example.demo.repository.ActiveIngredientRepository;
-import com.example.demo.repository.MedicationRepository;
 import com.example.demo.service.CatalogService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
-@Service
-public class CatalogServiceImpl implements CatalogService {
+@RestController
+@RequestMapping("/api/catalog")
+public class CatalogController {
 
-    private final MedicationRepository medicationRepository;
-    private final ActiveIngredientRepository ingredientRepository;
+    private final CatalogService catalogService;
 
-    public CatalogServiceImpl(
-            MedicationRepository medicationRepository,
-            ActiveIngredientRepository ingredientRepository
-    ) {
-        this.medicationRepository = medicationRepository;
-        this.ingredientRepository = ingredientRepository;
+    public CatalogController(CatalogService catalogService) {
+        this.catalogService = catalogService;
     }
 
-    @Override
-    public Medication addMedication(Medication medication) {
-        return medicationRepository.save(medication);
+    @PostMapping("/medications")
+    public ResponseEntity<Medication> addMedication(@RequestBody Medication medication) {
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(catalogService.addMedication(medication));
     }
 
-    @Override
-    public ActiveIngredient addIngredient(String name) {
-        ActiveIngredient ingredient = new ActiveIngredient(name);
-        return ingredientRepository.save(ingredient);
-    }
-
-    @Override
-    public List<Medication> getAllMedications() {
-        return medicationRepository.findAll();
+    @GetMapping("/medications")
+    public ResponseEntity<?> getAllMedications() {
+        return ResponseEntity.ok(catalogService.getAllMedications());
     }
 }
