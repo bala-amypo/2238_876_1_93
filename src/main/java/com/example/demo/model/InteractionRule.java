@@ -10,14 +10,10 @@ public class InteractionRule {
 
     public InteractionRule() {}
 
-    public InteractionRule(
-            ActiveIngredient ingredientA,
-            ActiveIngredient ingredientB,
-            String severity,
-            String description
-    ) {
-        this.ingredientA = ingredientA;
-        this.ingredientB = ingredientB;
+    public InteractionRule(ActiveIngredient a, ActiveIngredient b,
+                           String severity, String description) {
+        this.ingredientA = a;
+        this.ingredientB = b;
         this.severity = severity;
         this.description = description;
     }
@@ -26,10 +22,14 @@ public class InteractionRule {
     public void setId(Long id) { this.id = id; }
 
     public ActiveIngredient getIngredientA() { return ingredientA; }
-    public void setIngredientA(ActiveIngredient ingredientA) { this.ingredientA = ingredientA; }
+    public void setIngredientA(ActiveIngredient ingredientA) {
+        this.ingredientA = ingredientA;
+    }
 
     public ActiveIngredient getIngredientB() { return ingredientB; }
-    public void setIngredientB(ActiveIngredient ingredientB) { this.ingredientB = ingredientB; }
+    public void setIngredientB(ActiveIngredient ingredientB) {
+        this.ingredientB = ingredientB;
+    }
 
     public String getSeverity() { return severity; }
     public void setSeverity(String severity) { this.severity = severity; }
