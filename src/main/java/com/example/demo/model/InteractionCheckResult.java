@@ -1,29 +1,33 @@
 package com.example.demo.model;
 
-import jakarta.persistence.*;
+import java.time.LocalDateTime;
 
-@Entity
 public class InteractionCheckResult {
 
-    @Id
-    
     private Long id;
-
-    private String severity;
-    private String message;
+    private String medications;
+    private String interactions;
+    private LocalDateTime checkedAt = LocalDateTime.now();
 
     public InteractionCheckResult() {}
 
-    public InteractionCheckResult(String severity, String message) {
-        this.severity = severity;
-        this.message = message;
+    public InteractionCheckResult(String medications, String interactions) {
+        this.medications = medications;
+        this.interactions = interactions;
     }
 
     public Long getId() { return id; }
-    public String getSeverity() { return severity; }
-    public String getMessage() { return message; }
+    public void setId(Long id) { this.id = id; }
 
-    public void setId(Long id) {
-        this.id = id;
+    public String getMedications() { return medications; }
+    public void setMedications(String medications) {
+        this.medications = medications;
     }
+
+    public String getInteractions() { return interactions; }
+    public void setInteractions(String interactions) {
+        this.interactions = interactions;
+    }
+
+    public LocalDateTime getCheckedAt() { return checkedAt; }
 }

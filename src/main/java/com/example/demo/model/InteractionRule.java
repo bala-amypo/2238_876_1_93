@@ -1,31 +1,20 @@
 package com.example.demo.model;
 
-import jakarta.persistence.*;
-
-@Entity
 public class InteractionRule {
 
-    @Id
-    
     private Long id;
-
-    @ManyToOne
     private ActiveIngredient ingredientA;
-
-    @ManyToOne
     private ActiveIngredient ingredientB;
-
     private String severity;
     private String description;
 
     public InteractionRule() {}
 
-    // REQUIRED constructor
     public InteractionRule(
-            ActiveIngredient a,
-            ActiveIngredient b,
-            String severity,
-            String description
+        ActiveIngredient a,
+        ActiveIngredient b,
+        String severity,
+        String description
     ) {
         this.ingredientA = a;
         this.ingredientB = b;
@@ -34,13 +23,17 @@ public class InteractionRule {
     }
 
     public Long getId() { return id; }
-    public void setId(long id) { this.id = id; }
+    public void setId(Long id) { this.id = id; }
 
     public ActiveIngredient getIngredientA() { return ingredientA; }
-    public void setIngredientA(ActiveIngredient ingredientA) { this.ingredientA = ingredientA; }
+    public void setIngredientA(ActiveIngredient ingredientA) {
+        this.ingredientA = ingredientA;
+    }
 
     public ActiveIngredient getIngredientB() { return ingredientB; }
-    public void setIngredientB(ActiveIngredient ingredientB) { this.ingredientB = ingredientB; }
+    public void setIngredientB(ActiveIngredient ingredientB) {
+        this.ingredientB = ingredientB;
+    }
 
     public String getSeverity() { return severity; }
     public void setSeverity(String severity) { this.severity = severity; }
