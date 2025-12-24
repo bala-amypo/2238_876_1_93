@@ -1,32 +1,32 @@
-package com.example.demo.controller;
+// package com.example.demo.controller;
 
-import com.example.demo.util.JwtUtil;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.web.bind.annotation.*;
+// import com.example.demo.util.JwtUtil;
+// import org.springframework.http.ResponseEntity;
+// import org.springframework.security.core.userdetails.User;
+// import org.springframework.security.core.userdetails.UserDetails;
+// import org.springframework.web.bind.annotation.*;
 
-@RestController
-@RequestMapping("/auth")
-public class AuthController {
+// @RestController
+// @RequestMapping("/auth")
+// public class AuthController {
 
-    private final JwtUtil jwtUtil;
+//     private final JwtUtil jwtUtil;
 
-    public AuthController(JwtUtil jwtUtil) {
-        this.jwtUtil = jwtUtil;
-    }
+//     public AuthController(JwtUtil jwtUtil) {
+//         this.jwtUtil = jwtUtil;
+//     }
 
-    @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestParam String username,
-                                        @RequestParam String password) {
+//     @PostMapping("/login")
+//     public ResponseEntity<String> login(@RequestParam String username,
+//                                         @RequestParam String password) {
 
-        UserDetails userDetails = User.builder()
-                .username(username)
-                .password(password)
-                .roles("USER")
-                .build();
+//         UserDetails userDetails = User.builder()
+//                 .username(username)
+//                 .password(password)
+//                 .roles("USER")
+//                 .build();
 
-        String token = jwtUtil.generateToken(userDetails);
-        return ResponseEntity.ok(token);
-    }
-}
+//         String token = jwtUtil.generateToken(userDetails);
+//         return ResponseEntity.ok(token);
+//     }
+// }

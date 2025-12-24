@@ -1,19 +1,19 @@
-package com.example.demo.dto;
+// package com.example.demo.dto;
 
-import java.util.List;
+// import java.util.List;
 
-public class InteractionCheckRequest {
+// public class InteractionCheckRequest {
 
-    private List<Long> medicationIds;
+//     private List<Long> medicationIds;
 
-    public InteractionCheckRequest() {
-    }
+//     public InteractionCheckRequest() {
+//     }
 
-    public List<Long> getMedicationIds() {
-        return medicationIds;
-    }
+//     public List<Long> getMedicationIds() {
+//         return medicationIds;
+//     }
 
-    public void setMedicationIds(List<Long> medicationIds) {
-        this.medicationIds = medicationIds;
-    }
-}
+//     public void setMedicationIds(List<Long> medicationIds) {
+//         this.medicationIds = medicationIds;
+//     }
+// }
