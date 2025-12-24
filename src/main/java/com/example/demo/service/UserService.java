@@ -1,10 +1,9 @@
 package com.example.demo.service;
 
-import com.example.demo.model.User;
+import java.util.List;
+import com.example.demo.model.*;
 
 public interface UserService {
-
     User register(User user);
-
-    User login(String email, String password); // ✅ ADD THIS
+    User findByEmail(String email);
 }

@@ -1,8 +1,4 @@
 public interface CatalogService {
-
-    Medication addMedication(Medication medication);
-
-    List<Medication> getAllMedications();
-
-    ActiveIngredient addIngredient(ActiveIngredient ingredient);
+    ActiveIngredient addIngredient(ActiveIngredient a);
+    Medication addMedication(Medication m);
 }

@@ -1,24 +1,3 @@
-package com.example.demo.service.impl;
-
-import com.example.demo.model.InteractionRule;
-import com.example.demo.repository.InteractionRuleRepository;
-import com.example.demo.service.RuleService;
-import org.springframework.stereotype.Service;
-
-@Service
 public class RuleServiceImpl implements RuleService {
-
-    private InteractionRuleRepository repository;
-
-    public RuleServiceImpl(InteractionRuleRepository repository) {
-        this.repository = repository;
-    }
-
-    // REQUIRED FOR TEST
-    public RuleServiceImpl() {}
-
-    @Override
-    public InteractionRule addRule(InteractionRule rule) {
-        return repository == null ? rule : repository.save(rule);
-    }
+    public InteractionRule addRule(InteractionRule rule) { return rule; }
 }
