@@ -15,14 +15,6 @@ public class Medication {
         this.name = name;
     }
 
-    public void addIngredient(ActiveIngredient ingredient) {
-        ingredients.add(ingredient);
-    }
-
-    public void removeIngredient(ActiveIngredient ingredient) {
-        ingredients.remove(ingredient);
-    }
-
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
@@ -30,7 +22,16 @@ public class Medication {
     public void setName(String name) { this.name = name; }
 
     public Set<ActiveIngredient> getIngredients() { return ingredients; }
+
     public void setIngredients(Set<ActiveIngredient> ingredients) {
         this.ingredients = ingredients;
+    }
+
+    public void addIngredient(ActiveIngredient ingredient) {
+        this.ingredients.add(ingredient);
+    }
+
+    public void removeIngredient(ActiveIngredient ingredient) {
+        this.ingredients.remove(ingredient);
     }
 }
