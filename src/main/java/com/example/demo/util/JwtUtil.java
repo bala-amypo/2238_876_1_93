@@ -1,37 +1,33 @@
-// package com.example.demo.util;
+package com.example.demo.util;
 
-// import org.springframework.security.core.userdetails.UserDetails;
-// import org.springframework.stereotype.Component;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
+import org.springframework.security.core.userdetails.UserDetails;
 
-// @Component
-// public class JwtUtil {
+import java.util.Date;
 
-//     // REQUIRED overloads
-//     public String generateToken(String email, long userId, String role) {
-//         return "token";
-//     }
+public class JwtUtil {
 
-//     public String generateToken(String email, String role) {
-//         return "token";
-//     }
+    private static final String SECRET_KEY = "secret123";
 
-//     public boolean validateToken(String token) {
-//         return true;
-//     }
+    public String generateToken(UserDetails userDetails) {
+        return Jwts.builder()
+                .setSubject(userDetails.getUsername())
+                .setIssuedAt(new Date())
+                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60))
+                .signWith(SignatureAlgorithm.HS256, SECRET_KEY)
+                .compact();
+    }
 
-//     public boolean validateToken(String token, UserDetails userDetails) {
-//         return true;
-//     }
+    public String extractUsername(String token) {
+        return getClaims(token).getSubject();
+    }
 
-//     public String extractUsername(String token) {
-//         return "user@example.com";
-//     }
-
-//     public long extractUserId(String token) {
-//         return 1L;
-//     }
-
-//     public String extractRole(String token) {
-//         return "USER";
-//     }
-// }
+    private Claims getClaims(String token) {
+        return Jwts.parser()
+                .setSigningKey(SECRET_KEY)
+                .parseClaimsJws(token)
+                .getBody();
+    }
+}
