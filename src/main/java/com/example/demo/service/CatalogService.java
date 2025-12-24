@@ -1,14 +1,8 @@
-package com.example.demo.service;
-
-import com.example.demo.model.ActiveIngredient;
-import com.example.demo.model.Medication;
-import java.util.List;
-
 public interface CatalogService {
-
-    ActiveIngredient addIngredient(String name);
 
     Medication addMedication(Medication medication);
 
     List<Medication> getAllMedications();
+
+    ActiveIngredient addIngredient(ActiveIngredient ingredient);
 }
