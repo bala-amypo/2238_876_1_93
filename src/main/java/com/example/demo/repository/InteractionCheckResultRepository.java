@@ -5,5 +5,7 @@ import java.util.Optional;
 
 public interface InteractionCheckResultRepository {
 
-    Optional<InteractionCheckResult> findById(Long id);
+    InteractionCheckResult save(InteractionCheckResult result);
+
+    Optional<InteractionCheckResult> findById(long id);
 }

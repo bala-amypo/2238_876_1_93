@@ -6,7 +6,9 @@ import java.util.Optional;
 
 public interface MedicationRepository {
 
-    Optional<Medication> findById(Long id);
+    Medication save(Medication medication);
+
+    Optional<Medication> findById(long id);
 
     List<Medication> findAll();
 }

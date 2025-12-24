@@ -8,4 +8,6 @@ public interface InteractionService {
     InteractionCheckResult checkInteractions(List<Long> medicationIds);
 
     List<InteractionCheckResult> history();
+
+    InteractionCheckResult getResult(long id);
 }

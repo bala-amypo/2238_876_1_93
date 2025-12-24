@@ -6,7 +6,11 @@ import java.util.Optional;
 
 public interface InteractionRuleRepository {
 
-    Optional<InteractionRule> findById(Long id);
+    InteractionRule save(InteractionRule rule);
 
-    List<InteractionRule> findAll();
+    Optional<InteractionRule> findById(long id);
+
+    List<InteractionRule> findByIngredientId(long ingredientId);
+
+    Optional<InteractionRule> findRuleBetweenIngredients(long a, long b);
 }

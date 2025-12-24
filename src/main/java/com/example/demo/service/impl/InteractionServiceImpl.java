@@ -17,4 +17,9 @@ public class InteractionServiceImpl implements InteractionService {
     public List<InteractionCheckResult> history() {
         return new ArrayList<>();
     }
+
+    @Override
+    public InteractionCheckResult getResult(long id) {
+        return null;
+    }
 }
