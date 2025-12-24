@@ -20,14 +20,10 @@ public class InteractionCheckResult {
     public void setId(Long id) { this.id = id; }
 
     public String getMedications() { return medications; }
-    public void setMedications(String medications) {
-        this.medications = medications;
-    }
+    public void setMedications(String medications) { this.medications = medications; }
 
     public String getInteractions() { return interactions; }
-    public void setInteractions(String interactions) {
-        this.interactions = interactions;
-    }
+    public void setInteractions(String interactions) { this.interactions = interactions; }
 
     public LocalDateTime getCheckedAt() { return checkedAt; }
 }
