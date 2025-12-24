@@ -1,11 +1,14 @@
 package com.example.demo.repository;
 
 import com.example.demo.model.ActiveIngredient;
+import org.springframework.data.jpa.repository.JpaRepository;
+
 import java.util.Optional;
 
-public interface ActiveIngredientRepository {
+public interface ActiveIngredientRepository
+        extends JpaRepository<ActiveIngredient, Long> {
 
-    ActiveIngredient save(ActiveIngredient ingredient);
+    Optional<ActiveIngredient> findByName(String name);
 
-    Optional<ActiveIngredient> findById(long id);
+    boolean existsByName(String name);
 }

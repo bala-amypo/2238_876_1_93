@@ -1,14 +1,8 @@
 package com.example.demo.repository;
 
 import com.example.demo.model.Medication;
-import java.util.List;
-import java.util.Optional;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface MedicationRepository {
-
-    Medication save(Medication medication);
-
-    Optional<Medication> findById(long id);
-
-    List<Medication> findAll();
+public interface MedicationRepository
+        extends JpaRepository<Medication, Long> {
 }

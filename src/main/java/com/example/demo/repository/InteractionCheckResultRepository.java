@@ -1,11 +1,8 @@
 package com.example.demo.repository;
 
 import com.example.demo.model.InteractionCheckResult;
-import java.util.Optional;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface InteractionCheckResultRepository {
-
-    InteractionCheckResult save(InteractionCheckResult result);
-
-    Optional<InteractionCheckResult> findById(long id);
+public interface InteractionCheckResultRepository
+        extends JpaRepository<InteractionCheckResult, Long> {
 }
