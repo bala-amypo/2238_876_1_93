@@ -4,10 +4,6 @@ import com.example.demo.model.InteractionCheckResult;
 import java.util.List;
 
 public interface InteractionService {
-
-    InteractionCheckResult checkInteractions(List<Long> medicationIds);
-
-    List<InteractionCheckResult> history();
-
-    InteractionCheckResult getResult(long id);
+    InteractionCheckResult checkInteractions(List<Long> ids);
+    InteractionCheckResult getResult(Long id);
 }

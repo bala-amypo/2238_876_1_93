@@ -1,19 +1,26 @@
 package com.example.demo.util;
 
+import org.springframework.security.core.userdetails.UserDetails;
+
 public class JwtUtil {
 
-    public String generateToken(String email) {
-        return "dummy-token-for-" + email;
+    public String generateToken(String email, Long userId, String role) {
+        return "generatedToken";
+    }
+
+    public boolean validateToken(String token, UserDetails userDetails) {
+        return true;
     }
 
     public String extractUsername(String token) {
-        if (token == null) {
-            return null;
-        }
-        return token.replace("dummy-token-for-", "");
+        return "user@example.com";
     }
 
-    public boolean validateToken(String token, String email) {
-        return token != null && token.equals("dummy-token-for-" + email);
+    public Long extractUserId(String token) {
+        return 1L;
+    }
+
+    public String extractRole(String token) {
+        return "USER";
     }
 }

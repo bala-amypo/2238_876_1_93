@@ -5,13 +5,13 @@ import com.example.demo.service.UserService;
 
 public class UserServiceImpl implements UserService {
 
-    @Override
-    public User findByEmail(String email) {
-        return null;
-    }
+    public UserServiceImpl() {}
 
-    @Override
     public User register(User user) {
         return user;
+    }
+
+    public User findByEmail(String email) {
+        throw new RuntimeException("User not found");
     }
 }
