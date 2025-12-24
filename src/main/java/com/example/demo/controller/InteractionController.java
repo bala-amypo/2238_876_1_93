@@ -1,21 +1,33 @@
-// package com.example.demo.controller;
+package com.example.demo.controller;
 
-// import com.example.demo.model.InteractionCheckResult;
-// import com.example.demo.service.InteractionService;
-// import org.springframework.web.bind.annotation.*;
+import com.example.demo.model.InteractionCheckResult;
+import com.example.demo.service.InteractionService;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
-// @RestController
-// @RequestMapping("/interactions")
-// public class InteractionController {
+import java.util.List;
 
-//     private final InteractionService service;
+@RestController
+@RequestMapping("/interact")
+public class InteractionController {
 
-//     public InteractionController(InteractionService service) {
-//         this.service = service;
-//     }
+    private final InteractionService interactionService;
 
-//     @GetMapping("/{id}")
-//     public InteractionCheckResult getResult(@PathVariable Long id) {
-//         return service.checkInteractions(java.util.List.of(id));
-//     }
-// }
+    public InteractionController(InteractionService interactionService) {
+        this.interactionService = interactionService;
+    }
+
+    @PostMapping("/check")
+    public ResponseEntity<InteractionCheckResult> checkInteractions(
+            @RequestBody List<Long> medicationIds) {
+        return ResponseEntity.ok(
+                interactionService.checkInteractions(medicationIds)
+        );
+    }
+
+    @GetMapping("/result/{id}")
+    public ResponseEntity<InteractionCheckResult> getResult(
+            @PathVariable Long id) {
+        return ResponseEntity.ok(interactionService.getResult(id));
+    }
+}
