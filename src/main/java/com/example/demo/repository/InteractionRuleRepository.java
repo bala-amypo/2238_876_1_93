@@ -1,21 +1,21 @@
-package com.example.demo.repository;
+// package com.example.demo.repository;
 
-import com.example.demo.model.InteractionRule;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
+// import com.example.demo.model.InteractionRule;
+// import org.springframework.data.jpa.repository.JpaRepository;
+// import org.springframework.data.jpa.repository.Query;
+// import org.springframework.data.repository.query.Param;
 
-import java.util.List;
+// import java.util.List;
 
-public interface InteractionRuleRepository extends JpaRepository<InteractionRule, Long> {
+// public interface InteractionRuleRepository extends JpaRepository<InteractionRule, Long> {
 
-    @Query("""
-        SELECT r FROM InteractionRule r
-        WHERE r.ingredientA.id = :ingredientId
-           OR r.ingredientB.id = :ingredientId
-    """)
-    List<InteractionRule> findByIngredientId(@Param("ingredientId") Long ingredientId);
-}
+//     @Query("""
+//         SELECT r FROM InteractionRule r
+//         WHERE r.ingredientA.id = :ingredientId
+//            OR r.ingredientB.id = :ingredientId
+//     """)
+//     List<InteractionRule> findByIngredientId(@Param("ingredientId") Long ingredientId);
+// }
 
 
 // package com.example.demo.repository;
