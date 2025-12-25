@@ -1,3 +1,12 @@
+package com.example.demo.controller;
+
+import com.example.demo.model.ActiveIngredient;
+import com.example.demo.model.Medication;
+import com.example.demo.service.CatalogService;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
 @RestController
 @RequestMapping("/catalog")
 public class CatalogController {
@@ -19,7 +28,7 @@ public class CatalogController {
     }
 
     @GetMapping("/medications")
-    public List<Medication> getAll() {
+    public List<Medication> listMedications() {
         return List.of();
     }
 }
