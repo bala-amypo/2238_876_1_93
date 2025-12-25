@@ -23,6 +23,6 @@ public class InteractionController {
 
     @GetMapping("/result/{id}")
     public InteractionCheckResult getResult(@PathVariable Long id) {
-        return interactionService.getResult(id);
+        return interactionService.checkInteractions(List.of(id));
     }
 }
