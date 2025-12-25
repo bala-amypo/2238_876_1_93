@@ -22,6 +22,11 @@ public class CatalogServiceImpl implements CatalogService {
     }
 
     @Override
+    public ActiveIngredient addIngredient(ActiveIngredient ingredient) {
+        return ingredientRepository.save(ingredient);
+    }
+
+    @Override
     public Medication addMedication(Medication medication) {
         return medicationRepository.save(medication);
     }
@@ -29,12 +34,5 @@ public class CatalogServiceImpl implements CatalogService {
     @Override
     public List<Medication> getAllMedications() {
         return medicationRepository.findAll();
-    }
-
-    @Override
-    public ActiveIngredient addIngredient(String name) {
-        ActiveIngredient ingredient = new ActiveIngredient();
-        ingredient.setName(name);
-        return ingredientRepository.save(ingredient);
     }
 }

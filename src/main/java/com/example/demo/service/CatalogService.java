@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface CatalogService {
 
-    ActiveIngredient addIngredient(String name);
+    ActiveIngredient addIngredient(ActiveIngredient ingredient);
 
     Medication addMedication(Medication medication);
 
