@@ -3,7 +3,6 @@ package com.example.demo.model;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "active_ingredients")
 public class ActiveIngredient {
 
     @Id
@@ -12,26 +11,15 @@ public class ActiveIngredient {
 
     private String name;
 
-    public ActiveIngredient() {
-    }
+    public ActiveIngredient() {}
 
     public ActiveIngredient(String name) {
         this.name = name;
     }
 
-    public Long getId() {
-        return id;
-    }
+    public Long getId() { return id; }
+    public String getName() { return name; }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
+    public void setId(Long id) { this.id = id; }
+    public void setName(String name) { this.name = name; }
 }
