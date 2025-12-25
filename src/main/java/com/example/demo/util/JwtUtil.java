@@ -1,26 +1,24 @@
 package com.example.demo.util;
 
-import org.springframework.security.core.userdetails.UserDetails;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.security.Keys;
+import org.springframework.stereotype.Component;
 
+import java.security.Key;
+import java.util.Date;
+
+@Component
 public class JwtUtil {
 
-    public String generateToken(String email, Long userId, String role) {
-        return "generatedToken";
-    }
+    private static final Key key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
 
-    public boolean validateToken(String token, UserDetails userDetails) {
-        return true;
-    }
-
-    public String extractUsername(String token) {
-        return "user@example.com";
-    }
-
-    public Long extractUserId(String token) {
-        return 1L;
-    }
-
-    public String extractRole(String token) {
-        return "USER";
+    public String generateToken(String subject) {
+        return Jwts.builder()
+                .setSubject(subject)
+                .setIssuedAt(new Date())
+                .setExpiration(new Date(System.currentTimeMillis() + 86400000))
+                .signWith(key)
+                .compact();
     }
 }

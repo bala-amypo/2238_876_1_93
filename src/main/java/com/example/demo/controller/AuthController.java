@@ -3,7 +3,6 @@ package com.example.demo.controller;
 import com.example.demo.model.User;
 import com.example.demo.service.UserService;
 import com.example.demo.util.JwtUtil;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -19,17 +18,8 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<User> register(@RequestBody User user) {
-        return ResponseEntity.ok(userService.register(user));
-    }
-
-    @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody User user) {
-        String token = jwtUtil.generateToken(
-                user.getEmail(),
-                1L,
-                user.getRole()
-        );
-        return ResponseEntity.ok(token);
+    public String register(@RequestBody User user) {
+        userService.register(user);
+        return jwtUtil.generateToken(user.getEmail());
     }
 }
