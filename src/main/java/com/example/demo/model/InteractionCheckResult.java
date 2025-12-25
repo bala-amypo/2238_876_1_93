@@ -20,6 +20,10 @@ public class InteractionCheckResult {
         return id;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public List<Long> getMedicationIds() {
         return medicationIds;
     }

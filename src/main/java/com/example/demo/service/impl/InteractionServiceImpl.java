@@ -10,21 +10,21 @@ import java.util.List;
 @Service
 public class InteractionServiceImpl implements InteractionService {
 
-    private final InteractionCheckResultRepository resultRepository;
+    private final InteractionCheckResultRepository repository;
 
-    public InteractionServiceImpl(InteractionCheckResultRepository resultRepository) {
-        this.resultRepository = resultRepository;
+    public InteractionServiceImpl(InteractionCheckResultRepository repository) {
+        this.repository = repository;
     }
 
     @Override
     public InteractionCheckResult checkInteractions(List<Long> medicationIds) {
         InteractionCheckResult result = new InteractionCheckResult();
         result.setMedicationIds(medicationIds);
-        return resultRepository.save(result);
+        return repository.save(result);
     }
 
     @Override
     public InteractionCheckResult getResult(Long id) {
-        return resultRepository.findById(id).orElse(null);
+        return repository.findById(id).orElse(null);
     }
 }
