@@ -22,4 +22,9 @@ public class InteractionServiceImpl implements InteractionService {
         result.setMedicationIds(medicationIds);
         return resultRepository.save(result);
     }
+
+    @Override
+    public InteractionCheckResult getResult(Long id) {
+        return resultRepository.findById(id).orElse(null);
+    }
 }
