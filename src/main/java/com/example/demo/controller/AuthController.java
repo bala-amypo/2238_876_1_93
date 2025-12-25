@@ -1,35 +1,34 @@
 package com.example.demo.controller;
 
 import com.example.demo.model.User;
-import com.example.demo.service.UserService;
+import com.example.demo.repository.UserRepository;
 import com.example.demo.util.JwtUtil;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
 
-    private final UserService userService;
-    private final JwtUtil jwtUtil;
+    private final UserRepository userRepository;
 
-    public AuthController(UserService userService, JwtUtil jwtUtil) {
-        this.userService = userService;
-        this.jwtUtil = jwtUtil;
+    public AuthController(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 
     @PostMapping("/register")
-    public ResponseEntity<User> register(@RequestBody User user) {
-        return ResponseEntity.ok(userService.register(user));
+    public User register(@RequestBody User user) {
+        return userRepository.save(user);
     }
 
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody User user) {
-        String token = jwtUtil.generateToken(
-                user.getEmail(),
-                1L,
-                user.getRole()
-        );
-        return ResponseEntity.ok(token);
+    public String login(@RequestBody User user) {
+        User existingUser = userRepository.findByEmail(user.getEmail())
+                .orElseThrow(() -> new RuntimeException("Invalid credentials"));
+
+        if (!existingUser.getPassword().equals(user.getPassword())) {
+            throw new RuntimeException("Invalid credentials");
+        }
+
+        return JwtUtil.generateToken(existingUser.getEmail());
     }
 }

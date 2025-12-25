@@ -1,26 +1,32 @@
 package com.example.demo.util;
 
-import org.springframework.security.core.userdetails.UserDetails;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.security.Keys;
+
+import java.security.Key;
+import java.util.Date;
 
 public class JwtUtil {
 
-    public String generateToken(String email, Long userId, String role) {
-        return "generatedToken";
+    private static final Key key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
+    private static final long EXPIRATION_TIME = 1000 * 60 * 60;
+
+    public static String generateToken(String username) {
+        return Jwts.builder()
+                .setSubject(username)
+                .setIssuedAt(new Date())
+                .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
+                .signWith(key)
+                .compact();
     }
 
-    public boolean validateToken(String token, UserDetails userDetails) {
-        return true;
-    }
-
-    public String extractUsername(String token) {
-        return "user@example.com";
-    }
-
-    public Long extractUserId(String token) {
-        return 1L;
-    }
-
-    public String extractRole(String token) {
-        return "USER";
+    public static String extractUsername(String token) {
+        return Jwts.parserBuilder()
+                .setSigningKey(key)
+                .build()
+                .parseClaimsJws(token)
+                .getBody()
+                .getSubject();
     }
 }
