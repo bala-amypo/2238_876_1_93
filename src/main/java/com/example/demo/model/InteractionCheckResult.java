@@ -1,7 +1,7 @@
 package com.example.demo.model;
 
 import jakarta.persistence.*;
-import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 public class InteractionCheckResult {
@@ -10,29 +10,21 @@ public class InteractionCheckResult {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String medications;
+    @ElementCollection
+    private List<Long> medicationIds;
 
-    @Lob
-    private String interactions;
-
-    private LocalDateTime checkedAt = LocalDateTime.now();
-
-    public InteractionCheckResult() {}
-
-    public InteractionCheckResult(String medications, String interactions) {
-        this.medications = medications;
-        this.interactions = interactions;
+    public InteractionCheckResult() {
     }
 
-    // getters & setters
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
+    public Long getId() {
+        return id;
+    }
 
-    public String getMedications() { return medications; }
-    public void setMedications(String medications) { this.medications = medications; }
+    public List<Long> getMedicationIds() {
+        return medicationIds;
+    }
 
-    public String getInteractions() { return interactions; }
-    public void setInteractions(String interactions) { this.interactions = interactions; }
-
-    public LocalDateTime getCheckedAt() { return checkedAt; }
+    public void setMedicationIds(List<Long> medicationIds) {
+        this.medicationIds = medicationIds;
+    }
 }
