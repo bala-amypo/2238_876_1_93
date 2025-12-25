@@ -13,8 +13,7 @@ public class InteractionCheckResult {
     @ElementCollection
     private List<Long> medicationIds;
 
-    public InteractionCheckResult() {
-    }
+    public InteractionCheckResult() {}
 
     public Long getId() {
         return id;
