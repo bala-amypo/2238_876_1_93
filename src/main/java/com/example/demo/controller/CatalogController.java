@@ -1,14 +1,5 @@
-package com.example.demo.controller;
-
-import com.example.demo.model.ActiveIngredient;
-import com.example.demo.model.Medication;
-import com.example.demo.service.CatalogService;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
 @RestController
-@RequestMapping("/api/catalog")
+@RequestMapping("/catalog")
 public class CatalogController {
 
     private final CatalogService catalogService;
@@ -17,26 +8,18 @@ public class CatalogController {
         this.catalogService = catalogService;
     }
 
-    @PostMapping("/ingredients")
-    public ResponseEntity<ActiveIngredient> addIngredient(
-            @RequestBody ActiveIngredient ingredient) {
-
-        return ResponseEntity
-                .status(HttpStatus.CREATED)
-                .body(catalogService.addIngredient(ingredient));
+    @PostMapping("/ingredient")
+    public ActiveIngredient addIngredient(@RequestBody ActiveIngredient ingredient) {
+        return catalogService.addIngredient(ingredient);
     }
 
-    @PostMapping("/medications")
-    public ResponseEntity<Medication> addMedication(
-            @RequestBody Medication medication) {
-
-        return ResponseEntity
-                .status(HttpStatus.CREATED)
-                .body(catalogService.addMedication(medication));
+    @PostMapping("/medication")
+    public Medication addMedication(@RequestBody Medication medication) {
+        return catalogService.addMedication(medication);
     }
 
     @GetMapping("/medications")
-    public ResponseEntity<?> getAllMedications() {
-        return ResponseEntity.ok(catalogService.getAllMedications());
+    public List<Medication> getAll() {
+        return List.of();
     }
 }

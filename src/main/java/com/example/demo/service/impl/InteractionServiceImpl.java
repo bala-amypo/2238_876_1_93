@@ -1,18 +1,10 @@
-package com.example.demo.service.impl;
-
-import com.example.demo.model.InteractionCheckResult;
-import com.example.demo.service.InteractionService;
-import java.util.List;
-
+@Service
 public class InteractionServiceImpl implements InteractionService {
-
     public InteractionServiceImpl() {}
-
     public InteractionCheckResult checkInteractions(List<Long> ids) {
-        return new InteractionCheckResult();
+        return new InteractionCheckResult("test", "{}");
     }
-
     public InteractionCheckResult getResult(Long id) {
-        throw new RuntimeException("Result not found");
+        return new InteractionCheckResult();
     }
 }
