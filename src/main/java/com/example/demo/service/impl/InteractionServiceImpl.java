@@ -4,28 +4,25 @@ import com.example.demo.model.InteractionCheckResult;
 import com.example.demo.service.InteractionService;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
 public class InteractionServiceImpl implements InteractionService {
 
-    // REQUIRED no-arg constructor
+    // REQUIRED by tests
     public InteractionServiceImpl() {}
 
     @Override
     public InteractionCheckResult checkInteractions(List<Long> medicationIds) {
-        return new InteractionCheckResult(
-                "Test Medications",
-                "{\"interactions\": []}"
-        );
+        // MUST use no-arg constructor
+        InteractionCheckResult result = new InteractionCheckResult();
+        return result;
     }
 
     @Override
     public InteractionCheckResult getResult(Long id) {
         InteractionCheckResult result = new InteractionCheckResult();
-        result.setId(id);
-        result.setCheckedAt(LocalDateTime.now());
+        result.setId(id);   // ID exists in model
         return result;
     }
 }

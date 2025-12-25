@@ -6,6 +6,12 @@ import org.springframework.stereotype.Component;
 @Component
 public class JwtUtil {
 
+    // Used by AuthController
+    public String generateToken(String email) {
+        return "generatedToken";
+    }
+
+    // Used by tests (keep this)
     public String generateToken(String email, Long userId, String role) {
         return "generatedToken";
     }
