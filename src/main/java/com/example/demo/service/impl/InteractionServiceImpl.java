@@ -1,10 +1,25 @@
+package com.example.demo.service.impl;
+
+import com.example.demo.model.InteractionCheckResult;
+import com.example.demo.repository.InteractionCheckResultRepository;
+import com.example.demo.service.InteractionService;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
 @Service
 public class InteractionServiceImpl implements InteractionService {
-    public InteractionServiceImpl() {}
-    public InteractionCheckResult checkInteractions(List<Long> ids) {
-        return new InteractionCheckResult("test", "{}");
+
+    private final InteractionCheckResultRepository resultRepository;
+
+    public InteractionServiceImpl(InteractionCheckResultRepository resultRepository) {
+        this.resultRepository = resultRepository;
     }
-    public InteractionCheckResult getResult(Long id) {
-        return new InteractionCheckResult();
+
+    @Override
+    public InteractionCheckResult checkInteractions(List<Long> medicationIds) {
+        InteractionCheckResult result = new InteractionCheckResult();
+        result.setMedicationIds(medicationIds);
+        return resultRepository.save(result);
     }
 }
