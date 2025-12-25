@@ -1,10 +1,39 @@
+package com.example.demo.service.impl;
+
+import com.example.demo.model.ActiveIngredient;
+import com.example.demo.model.Medication;
+import com.example.demo.repository.ActiveIngredientRepository;
+import com.example.demo.repository.MedicationRepository;
+import com.example.demo.service.CatalogService;
+import org.springframework.stereotype.Service;
+import java.util.List;
+
 @Service
 public class CatalogServiceImpl implements CatalogService {
-    public CatalogServiceImpl() {}
-    public ActiveIngredient addIngredient(ActiveIngredient ingredient) {
-        return ingredient;
+
+    private final ActiveIngredientRepository ingredientRepo;
+    private final MedicationRepository medicationRepo;
+
+    public CatalogServiceImpl(
+            ActiveIngredientRepository ingredientRepo,
+            MedicationRepository medicationRepo) {
+        this.ingredientRepo = ingredientRepo;
+        this.medicationRepo = medicationRepo;
     }
+
+    public ActiveIngredient addIngredient(ActiveIngredient ingredient) {
+        return ingredientRepo.save(ingredient);
+    }
+
     public Medication addMedication(Medication medication) {
-        return medication;
+        return medicationRepo.save(medication);
+    }
+
+    public List<ActiveIngredient> getAllIngredients() {
+        return ingredientRepo.findAll();
+    }
+
+    public List<Medication> getAllMedications() {
+        return medicationRepo.findAll();
     }
 }
