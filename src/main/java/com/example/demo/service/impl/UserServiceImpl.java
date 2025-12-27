@@ -10,13 +10,19 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
 
-    // constructor injection
+    // Constructor injection (CORRECT)
     public UserServiceImpl(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
     @Override
     public User register(User user) {
+
+        // basic duplicate check (important)
+        userRepository.findByEmail(user.getEmail()).ifPresent(u -> {
+            throw new RuntimeException("Email already registered");
+        });
+
         return userRepository.save(user);
     }
 
@@ -26,9 +32,9 @@ public class UserServiceImpl implements UserService {
         User user = userRepository.findByEmail(email)
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
-        // plain text comparison (for now)
+        // plain-text password check (OK for now)
         if (!user.getPassword().equals(password)) {
-            throw new RuntimeException("Invalid password");
+            throw new RuntimeException("Invalid credentials");
         }
 
         return user;
@@ -40,6 +46,7 @@ public class UserServiceImpl implements UserService {
                 .orElseThrow(() -> new RuntimeException("User not found"));
     }
 }
+
 
 
 // package com.example.demo.service.impl;
