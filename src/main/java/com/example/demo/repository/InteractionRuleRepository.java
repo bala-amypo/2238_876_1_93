@@ -10,7 +10,7 @@ import java.util.Optional;
 
 public interface InteractionRuleRepository extends JpaRepository<InteractionRule, Long> {
 
-    // Used by services & app
+
     @Query("""
         SELECT r FROM InteractionRule r
         WHERE r.ingredientA.id = :ingredientId
@@ -19,7 +19,7 @@ public interface InteractionRuleRepository extends JpaRepository<InteractionRule
     List<InteractionRule> findByIngredientId(@Param("ingredientId") Long ingredientId);
 
 
-    // REQUIRED BY TEST FILE (DO NOT REMOVE / RENAME)
+
     @Query("""
         SELECT r FROM InteractionRule r
         WHERE (r.ingredientA.id = :id1 AND r.ingredientB.id = :id2)
@@ -30,6 +30,11 @@ public interface InteractionRuleRepository extends JpaRepository<InteractionRule
             @Param("id2") Long ingredientId2
     );
 }
+
+
+
+
+
 
 // package com.example.demo.repository;
 

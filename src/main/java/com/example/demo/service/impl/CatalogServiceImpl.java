@@ -11,7 +11,7 @@ import java.util.List;
 @Service
 public class CatalogServiceImpl implements CatalogService {
 
-    // REQUIRED: no-arg constructor for tests
+    
     public CatalogServiceImpl() {}
 
     @Override
