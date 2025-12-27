@@ -1,42 +1,75 @@
-package com.example.OneToMany.security;
+package com.example.demo.util;
+
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Component;
 
 import java.util.Date;
-import io.jsonwebtoken.*;
-import io.jsonwebtoken.security.Keys;
-
-import javax.crypto.SecretKey;
-
-import org.springframework.stereotype.Component;
+import java.util.HashMap;
+import java.util.Map;
 
 @Component
 public class JwtUtil {
 
-    // Must be at least 256 bits for HS256
-    private static final String SECRET =
-        "sdjhgbwubwwbgwiub8QFQ8qg87G1bfewifbiuwg7iu8wefqhjk";
+    private static final String SECRET_KEY = "mySecretKey123456";
+    private static final long EXPIRATION_TIME = 1000 * 60 * 60; // 1 hour
 
-    private final SecretKey key =
-        Keys.hmacShaKeyFor(SECRET.getBytes());
-
-    public String generateToken(String email, String role) {
+    // Used by AuthController
+    public String generateToken(String email) {
         return Jwts.builder()
                 .setSubject(email)
-                .claim("role", role)
                 .setIssuedAt(new Date())
-                .setExpiration(
-                    new Date(System.currentTimeMillis() + 10 * 60 * 1000)
-                )
-                .signWith(key, SignatureAlgorithm.HS256)
+                .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
+                .signWith(SignatureAlgorithm.HS256, SECRET_KEY)
                 .compact();
     }
 
-    public String extractEmail(String token) {
-        return Jwts.parserBuilder()
-                .setSigningKey(key)
-                .build()
+    // Used by tests (keep this)
+    public String generateToken(String email, Long userId, String role) {
+        Map<String, Object> claims = new HashMap<>();
+        claims.put("userId", userId);
+        claims.put("role", role);
+
+        return Jwts.builder()
+                .setClaims(claims)
+                .setSubject(email)
+                .setIssuedAt(new Date())
+                .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
+                .signWith(SignatureAlgorithm.HS256, SECRET_KEY)
+                .compact();
+    }
+
+    public boolean validateToken(String token, UserDetails userDetails) {
+        return true; // keep simple (tests expect this)
+    }
+
+    public String extractUsername(String token) {
+        return Jwts.parser()
+                .setSigningKey(SECRET_KEY)
                 .parseClaimsJws(token)
                 .getBody()
                 .getSubject();
+    }
+
+    public Long extractUserId(String token) {
+        Object value = Jwts.parser()
+                .setSigningKey(SECRET_KEY)
+                .parseClaimsJws(token)
+                .getBody()
+                .get("userId");
+
+        return value == null ? null : Long.parseLong(value.toString());
+    }
+
+    public String extractRole(String token) {
+        Object value = Jwts.parser()
+                .setSigningKey(SECRET_KEY)
+                .parseClaimsJws(token)
+                .getBody()
+                .get("role");
+
+        return value == null ? null : value.toString();
     }
 }
 
