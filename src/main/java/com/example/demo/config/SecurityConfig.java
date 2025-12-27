@@ -14,23 +14,38 @@ public class SecurityConfig {
         http
             .csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(auth -> auth
-                // ✅ AUTH ENDPOINTS MUST BE PUBLIC
                 .requestMatchers("/auth/**").permitAll()
-
-                // ✅ SWAGGER
                 .requestMatchers(
                     "/swagger-ui/**",
                     "/v3/api-docs/**",
                     "/swagger-ui.html"
                 ).permitAll()
-
-                // ❌ everything else can be secured later
                 .anyRequest().permitAll()
             );
 
         return http.build();
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

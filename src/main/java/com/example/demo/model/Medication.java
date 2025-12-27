@@ -29,8 +29,6 @@ public class Medication {
     public void removeIngredient(ActiveIngredient ingredient) {
         ingredients.remove(ingredient);
     }
-
-    // getters & setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
