@@ -1,34 +1,77 @@
-package com.example.demo.util;
+package com.example.OneToMany.security;
 
-import org.springframework.security.core.userdetails.UserDetails;
+import java.util.Date;
+import io.jsonwebtoken.*;
+import io.jsonwebtoken.security.Keys;
+
+import javax.crypto.SecretKey;
+
 import org.springframework.stereotype.Component;
 
 @Component
 public class JwtUtil {
 
-    // Used by AuthController
-    public String generateToken(String email) {
-        return "generatedToken";
+    // Must be at least 256 bits for HS256
+    private static final String SECRET =
+        "sdjhgbwubwwbgwiub8QFQ8qg87G1bfewifbiuwg7iu8wefqhjk";
+
+    private final SecretKey key =
+        Keys.hmacShaKeyFor(SECRET.getBytes());
+
+    public String generateToken(String email, String role) {
+        return Jwts.builder()
+                .setSubject(email)
+                .claim("role", role)
+                .setIssuedAt(new Date())
+                .setExpiration(
+                    new Date(System.currentTimeMillis() + 10 * 60 * 1000)
+                )
+                .signWith(key, SignatureAlgorithm.HS256)
+                .compact();
     }
 
-    // Used by tests (keep this)
-    public String generateToken(String email, Long userId, String role) {
-        return "generatedToken";
-    }
-
-    public boolean validateToken(String token, UserDetails userDetails) {
-        return true;
-    }
-
-    public String extractUsername(String token) {
-        return "user@example.com";
-    }
-
-    public Long extractUserId(String token) {
-        return 1L;
-    }
-
-    public String extractRole(String token) {
-        return "USER";
+    public String extractEmail(String token) {
+        return Jwts.parserBuilder()
+                .setSigningKey(key)
+                .build()
+                .parseClaimsJws(token)
+                .getBody()
+                .getSubject();
     }
 }
+
+
+// package com.example.demo.util;
+
+// import org.springframework.security.core.userdetails.UserDetails;
+// import org.springframework.stereotype.Component;
+
+// @Component
+// public class JwtUtil {
+
+//     // Used by AuthController
+//     public String generateToken(String email) {
+//         return "generatedToken";
+//     }
+
+//     // Used by tests (keep this)
+//     public String generateToken(String email, Long userId, String role) {
+//         return "generatedToken";
+//     }
+
+//     public boolean validateToken(String token, UserDetails userDetails) {
+//         return true;
+//     }
+
+//     public String extractUsername(String token) {
+//         return "user@example.com";
+//     }
+
+//     public Long extractUserId(String token) {
+//         return 1L;
+//     }
+
+//     public String extractRole(String token) {
+//         return "USER";
+//     }
+// }
