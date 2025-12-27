@@ -6,7 +6,6 @@ import com.example.demo.util.JwtUtil;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
 import java.util.Map;
 
 @RestController
@@ -22,20 +21,18 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<User> register(@RequestBody User user) {
-        return ResponseEntity.ok(userService.register(user));
+    public User register(@RequestBody User user) {
+        return userService.register(user);
     }
 
     @PostMapping("/login")
     public ResponseEntity<Map<String, String>> login(@RequestBody User user) {
-
         User loggedIn = userService.login(user.getEmail(), user.getPassword());
         String token = jwtUtil.generateToken(loggedIn.getEmail());
 
-        Map<String, String> response = new HashMap<>();
-        response.put("token", token);
-
-        return ResponseEntity.ok(response);
+        return ResponseEntity.ok(
+                Map.of("token", token)
+        );
     }
 }
 
