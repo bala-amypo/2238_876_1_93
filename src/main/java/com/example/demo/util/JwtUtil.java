@@ -13,8 +13,6 @@ import java.util.Map;
 
 @Component
 public class JwtUtil {
-
-    // MUST be at least 256 bits (32+ chars)
     private static final String SECRET_KEY =
             "mySuperSecureJwtSecretKey1234567890!!!";
 
@@ -22,7 +20,7 @@ public class JwtUtil {
 
     private final SecretKey key = Keys.hmacShaKeyFor(SECRET_KEY.getBytes());
 
-    // Used by AuthController
+
     public String generateToken(String email) {
         return Jwts.builder()
                 .setSubject(email)
@@ -31,8 +29,6 @@ public class JwtUtil {
                 .signWith(key)
                 .compact();
     }
-
-    // Used by tests (KEEP THIS)
     public String generateToken(String email, Long userId, String role) {
 
         Map<String, Object> claims = new HashMap<>();
@@ -47,8 +43,6 @@ public class JwtUtil {
                 .signWith(key)
                 .compact();
     }
-
-    // Keep simple for tests
     public boolean validateToken(String token, UserDetails userDetails) {
         return true;
     }
@@ -75,6 +69,16 @@ public class JwtUtil {
                 .getBody();
     }
 }
+
+
+
+
+
+
+
+
+
+
 
 
 // package com.example.demo.util;
