@@ -10,11 +10,10 @@ public class UserServiceImpl implements UserService {
 
     private UserRepository userRepository;
 
-    // ✅ REQUIRED for test cases
     public UserServiceImpl() {
     }
 
-    // ✅ REQUIRED for Spring Dependency Injection
+
     public UserServiceImpl(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
@@ -24,7 +23,7 @@ public class UserServiceImpl implements UserService {
         if (userRepository != null) {
             return userRepository.save(user);
         }
-        // fallback for tests
+
         return user;
     }
 
@@ -54,6 +53,16 @@ public class UserServiceImpl implements UserService {
                 .orElseThrow(() -> new RuntimeException("User not found"));
     }
 }
+
+
+
+
+
+
+
+
+
+
 
 
 

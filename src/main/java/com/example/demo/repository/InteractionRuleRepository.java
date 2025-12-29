@@ -36,6 +36,11 @@ public interface InteractionRuleRepository extends JpaRepository<InteractionRule
 
 
 
+
+
+
+
+
 // package com.example.demo.repository;
 
 // import com.example.demo.model.InteractionRule;

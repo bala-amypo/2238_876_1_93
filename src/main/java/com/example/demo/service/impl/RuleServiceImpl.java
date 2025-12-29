@@ -10,7 +10,7 @@ import java.util.List;
 @Service
 public class RuleServiceImpl implements RuleService {
 
-    // REQUIRED no-arg constructor
+
     public RuleServiceImpl() {}
 
     @Override
